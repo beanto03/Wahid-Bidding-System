@@ -1,0 +1,36 @@
+name: mongo
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: beanto03
+      MONGO_INITDB_ROOT_PASSWORD: bas00003
+    networks:
+      - mognonetwork
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: beanto03
+      ME_CONFIG_MONGODB_ADMINPASSWORD: bas00003
+      ME_CONFIG_MONGODB_URL: mongodb://beanto03:bas00003@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
+    networks:
+      - mognonetwork
+
+networks:
+  mognonetwork:
+    driver: bridge
+
+volumes:
+  db_data:
