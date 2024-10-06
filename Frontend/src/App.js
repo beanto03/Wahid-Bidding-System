@@ -4,6 +4,7 @@ import AdminPages from "./AdminPages";
 import SignInSide from "./FrontEnd/login/SignInSide";
 import StaffPages from "./StaffPages";
 import Home from "./FrontEnd/others/Home";
+import RegisterSide from "./FrontEnd/register/RegisterSide"
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
       path="/home"
       element= {<Home />}
     />
+    <Route 
+      path="/login"
+      element= {<SignInSide/>}
+    />
+    <Route
+      path="/register"
+      element= {<RegisterSide/>}    
+    />  
     </Routes>
       <AdminPages />
       <StaffPages />

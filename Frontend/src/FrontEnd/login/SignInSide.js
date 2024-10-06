@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,13 +14,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AuthService from '../../Auth/AuthService';
+import { purple, blue, pink } from '@mui/material/colors';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Bidding System Login Page
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,77 +29,112 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: pink[500],
+    },
+  },
+});
 
 export default function SignInSide() {
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoggedInAdmin, setIsLoggedInAdmin] = useState(false); // Add this line
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-  
+    event.preventDefault();
+
     try {
       const success = await AuthService.login(email, password);
       const userType = await localStorage.getItem('userType');
-      
-      if (success && userType === "1" ) {
-        setIsLoggedInAdmin(true);
-        navigate("/dashboard-admin");
-      } else if (success && userType === "2") {
-        navigate("/dashboard-staff");
-      
+
+      if (success && userType === '1') {
+        navigate('/dashboard-admin');
+      } else if (success && userType === '2') {
+        navigate('/dashboard-staff');
       } else {
-        // Handle login failure and display an error message to the user
-        alert("Login failed. Please check your credentials.");
+        alert('Login failed. Please check your credentials.');
       }
     } catch (error) {
-      // Handle network or other errors
-      console.error("Login error:", error);
-      alert("An error occurred while logging in.");
+      console.error('Login error:', error);
+      alert('An error occurred while logging in.');
     }
-  }
+  };
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh', // Full height of the viewport
+          backgroundImage: 'url(https://source.unsplash.com/random?colors)',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: (t) => t.palette.grey[200],
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <CssBaseline />
         <Grid
           item
-          xs={false}
-          sm={4}
-          md={7}
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            background: 'linear-gradient(135deg, #81cdfc 35%, #e3a2fc 100%)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 4,
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
           }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        >
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              height: '100%',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
+              mx: 4, // Horizontal margin
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar
+              sx={{
+                m: 1,
+                bgcolor: 'secondary.main',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+              }}
+            >
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{
+                color: 'white',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
+              }}
+            >
+              Welcome Back!
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            <TextField
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1, width: '100%' }}
+            >
+              <TextField
                 onChange={(e) => setEmail(e.target.value)}
                 margin="normal"
                 required
@@ -108,6 +144,17 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                sx={{
+                  input: {
+                    color: 'white',
+                  },
+                  '& .MuiInputLabel-root': { color: 'white' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { borderColor: 'white' },
+                    '&:hover fieldset': { borderColor: blue[400] },
+                    '&.Mui-focused fieldset': { borderColor: pink[300] },
+                  },
+                }}
               />
               <TextField
                 onChange={(e) => setPassword(e.target.value)}
@@ -119,37 +166,49 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                sx={{
+                  input: {
+                    color: 'white',
+                  },
+                  '& .MuiInputLabel-root': { color: 'white' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { borderColor: 'white' },
+                    '&:hover fieldset': { borderColor: blue[400] },
+                    '&.Mui-focused fieldset': { borderColor: pink[300] },
+                  },
+                }}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
+                sx={{ color: 'white' }}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  bgcolor: blue[500],
+                  '&:hover': { bgcolor: pink[500] },
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+                }}
               >
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/register" variant="body2" sx={{ color: 'white' }}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
+              <Copyright sx={{ mt: 5, color: 'white' }} />
             </Box>
           </Box>
         </Grid>
-      </Grid>
+      </Box>
     </ThemeProvider>
   );
 }
