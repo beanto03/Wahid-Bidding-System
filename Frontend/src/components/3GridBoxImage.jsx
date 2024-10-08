@@ -1,7 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../base/theme";
 
-
 const ThreeGridBoxImage = ({ title, subtitle, image, icon }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
