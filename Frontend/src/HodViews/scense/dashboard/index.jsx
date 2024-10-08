@@ -4,7 +4,7 @@ import Header from "../../../components/Header";
 const DashboardAdmin = () =>{
     return <Box m="20px">
         <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Header title="DASHBOARD" subtitle = "Welcome to Wesitex Dashboard" />
+            <Header title="DASHBOARD" subtitle = "Welcome to OneHead Dashboard Site" />
         </Box>
     </Box>
 }
