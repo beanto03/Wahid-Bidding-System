@@ -135,13 +135,6 @@ const SidebarManager = () => {
               selected={selected}
               setSelected={setSelected}
             />
-             <Item
-              title="View Product"
-              to="/login"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
             <Item
               title="Logout"
