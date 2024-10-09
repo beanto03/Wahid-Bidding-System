@@ -15,7 +15,6 @@ import {
 import { styled } from '@mui/system';
 import GavelIcon from '@mui/icons-material/Gavel';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
@@ -92,12 +91,6 @@ function Sidebar() {
             <AssignmentIcon sx={{ color: 'white' }} />
           </ListItemIcon>
           <ListItemText primary="My Bids" sx={{ color: 'white' }} />
-        </StyledListItem>
-        <StyledListItem button onClick={() => handleNavigation('/settings')}>
-          <ListItemIcon>
-            <SettingsIcon sx={{ color: 'white' }} />
-          </ListItemIcon>
-          <ListItemText primary="Settings" sx={{ color: 'white' }} />
         </StyledListItem>
         <StyledListItem button onClick={() => handleNavigation('/login')}>
           <ListItemIcon>

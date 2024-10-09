@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { carbidding, housebidding } from "../../assets/images";
+import Sidebar from '../../components/Sidebar';
 import { 
   Box, 
   Grid, 
@@ -112,6 +113,8 @@ const Home = () => {
   };
 
   return (
+    <>
+    <Sidebar/>
     <Box
       sx={{
         minHeight: '100vh',
@@ -134,7 +137,7 @@ const Home = () => {
           textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
         }}
       >
-        Welcome to the Bidding Website
+        Welcome to the OneHead Website
       </Typography>
       
       <Grid container spacing={4} justifyContent="center" sx={{ width: '100%', maxWidth: '1200px' }}>
@@ -303,6 +306,7 @@ const Home = () => {
         </Grid>
       </Grid>
     </Box>
+    </>
   );
 };
 
