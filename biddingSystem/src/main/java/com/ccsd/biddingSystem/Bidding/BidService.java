@@ -1,4 +1,4 @@
-package com.ccsd.biddingSystem.BiddingBuyer;
+package com.ccsd.biddingSystem.Bidding;
 
 import com.ccsd.biddingSystem.Product.Product;
 import com.ccsd.biddingSystem.Product.ProductRepository;

@@ -1,4 +1,4 @@
-package com.ccsd.biddingSystem.BiddingBuyer;
+package com.ccsd.biddingSystem.Bidding;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
