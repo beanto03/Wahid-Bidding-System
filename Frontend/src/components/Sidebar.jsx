@@ -12,7 +12,7 @@ import {
   Avatar,
   Box,
 } from '@mui/material';
-import { styled } from '@mui/system';
+import { height, styled, width } from '@mui/system';
 import GavelIcon from '@mui/icons-material/Gavel';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -55,9 +55,9 @@ const HeaderTypography = styled(Typography)(({ theme }) => ({
 }));
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
-  color: 'white',
+  color: 'red',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(566, 35, 250, 0.1)',
     cursor: 'pointer',
   },
 }));
