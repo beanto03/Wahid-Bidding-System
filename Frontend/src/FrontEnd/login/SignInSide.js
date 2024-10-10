@@ -89,20 +89,6 @@ export default function SignInSide() {
       >
 
     
-      <Box
-
-          height: '100vh', // Full height of the viewport
-          backgroundImage: 'url(https://source.unsplash.com/random?colors)',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: (t) => t.palette.grey[200],
-=======
-          height: '90vh', // Full height of the viewport    
-          backgroundRepeat: 'no-repeat',
-
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
         <CssBaseline />
         <Grid
           item

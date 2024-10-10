@@ -203,7 +203,7 @@ const AuthService = {
           console.error('Error setting up the request:', error.message);
         }
         throw error;
-      }
+      } 
     },
 
 
