@@ -18,7 +18,7 @@ public class Seller {
         return sellerId;
     }
 
-    public void setSellerId(String id){
+    public void setSellerId(String sellerId){
         this.sellerId = sellerId;
     }
 
