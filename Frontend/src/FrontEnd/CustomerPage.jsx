@@ -61,6 +61,7 @@ function CustomerBiddingDashboard() {
   }, []);
 
   return (
+
     <>
       {/* Sidebar Header */}
        <Sidebar />
