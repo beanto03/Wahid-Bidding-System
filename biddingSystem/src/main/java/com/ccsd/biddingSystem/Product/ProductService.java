@@ -49,4 +49,5 @@ public class ProductService {
     public Optional<Product> getProductById(String productId) {
         return productRepository.findById(productId);
     }
+}
 
