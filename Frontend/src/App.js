@@ -19,7 +19,7 @@ function App() {
         }
       />
     <Route
-      path="/home"
+      path="/biddingPage"
       element= {<Home />}
     />
     <Route 

@@ -75,12 +75,12 @@ function Sidebar() {
       <Toolbar />
       <ProfileBox>
         <StyledAvatar alt="Profile Picture" src="https://via.placeholder.com/150" />
-        <HeaderTypography variant="h6">John Doe</HeaderTypography>
-        <HeaderTypography variant="body2">johndoe@example.com</HeaderTypography>
+        <HeaderTypography variant="h6">Aiman Doe</HeaderTypography>
+        <HeaderTypography variant="body2">aimanDoe@gmail.com</HeaderTypography>
       </ProfileBox>
       <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)', marginBottom: 2 }} />
       <List>
-        <StyledListItem button onClick={() => handleNavigation('/home')}>
+        <StyledListItem button onClick={() => handleNavigation('/biddingPage')}>
           <ListItemIcon>
             <GavelIcon sx={{ color: 'white' }} />
           </ListItemIcon>

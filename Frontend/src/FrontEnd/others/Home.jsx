@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { carbidding, housebidding } from "../../assets/images";
 import Sidebar from '../../components/Sidebar';
+import Topbar from '../../HodViews/scense/global/Topbar';
 import { 
   Box, 
   Grid, 
@@ -114,6 +115,7 @@ const Home = () => {
 
   return (
     <>
+    
     <Sidebar/>
     <Box
       sx={{

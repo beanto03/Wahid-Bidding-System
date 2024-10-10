@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Box, Typography, useTheme, Button, Grid } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import { tokens } from "../../../base/theme";
 import Header from "../../../components/Header";
@@ -11,22 +9,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';  // Import the PhotoCamera icon
 import { useNavigate } from 'react-router-dom';
 import SaveItemsManager from '../../saveItemManager';
-import TelegramIcon from '@mui/icons-material/Telegram';
-import TollIcon from '@mui/icons-material/Toll';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import EmojiSymbolsIcon from '@mui/icons-material/EmojiSymbols';
 
 const AddDriver = () => {
     const theme = useTheme();
