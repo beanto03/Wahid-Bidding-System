@@ -1,3 +1,4 @@
+
 // ProductRepository.java
 package com.ccsd.biddingSystem.Product;
 
@@ -9,4 +10,3 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     // Find all products by a specific seller ID
     List<Product> findAllBySellerId(String sellerId);
-}

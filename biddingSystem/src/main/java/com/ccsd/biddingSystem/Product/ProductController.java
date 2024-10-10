@@ -1,3 +1,4 @@
+
 // ProductController.java
 package com.ccsd.biddingSystem.Product;
 
@@ -44,4 +45,5 @@ public class ProductController {
     public Optional<Product> getProductById(@PathVariable String id) {
         return productService.getProductById(id);
     }
+
 }
