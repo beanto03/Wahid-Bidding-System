@@ -19,7 +19,7 @@ public class Buyer {
         return buyerId;
     }
 
-    public void setBuyerId(String id){
+    public void setBuyerId(String buyerId){
         this.buyerId = buyerId;
     }
 
