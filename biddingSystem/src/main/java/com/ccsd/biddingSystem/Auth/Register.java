@@ -1,11 +1,6 @@
 package com.ccsd.biddingSystem.Auth;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "user")
 public class Register {
-    @Id
     private String name;
     private String email; 
     private String password;
@@ -38,7 +33,7 @@ public class Register {
         return role;
     }
 
-    public void setRole(){
+    public void setRole(int role){
         this.role = role;
     }
 }
