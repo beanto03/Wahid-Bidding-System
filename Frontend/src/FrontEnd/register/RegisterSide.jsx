@@ -18,7 +18,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AuthService from '../../Auth/AuthService';  // Adjust this according to your service location
 import { useNavigate } from 'react-router-dom';
 import { purple, blue, pink } from '@mui/material/colors';
+
 import { buildingImage } from '../../assets/images';
+
 
 function Copyright(props) {
   return (
@@ -70,7 +72,9 @@ export default function Register() {
     try {
       const success = await AuthService.register({ name, email, password, role });
       if (success) {
-        navigate("/dashboard-user");  // After successful registration, navigate to user dashboard
+
+        navigate("/login");  // After successful registration, navigate to user dashboard
+
       } else {
         alert("Registration failed. Please try again.");
       }
@@ -82,6 +86,7 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={theme}>
+
       <Box
        sx={{
         minHeight: '100vh',
@@ -95,15 +100,19 @@ export default function Register() {
         boxSizing: 'border-box',
       }}
       >
+
       <Grid 
         container 
         component="main" 
         sx={{ 
-          height: '90vh', 
+
+          height: '100vh', 
+
           justifyContent: 'center', // Center horizontally
           alignItems: 'center', // Center vertically
           backgroundImage: 'url(https://source.unsplash.com/random?technology)',
           backgroundRepeat: 'no-repeat',
+
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -268,7 +277,9 @@ export default function Register() {
                       row
                     >
                       <FormControlLabel value="seller" control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Seller" />
-                      <FormControlLabel value="bidder" control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Bidder" />
+
+                      <FormControlLabel value="buyer" control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Bidder" />
+
                     </RadioGroup>
                   </FormControl>
                 </Grid>
@@ -306,7 +317,9 @@ export default function Register() {
           </Box>
         </Grid>
       </Grid>
+
       </Box>
+
     </ThemeProvider>
   );
 }

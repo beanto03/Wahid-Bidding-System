@@ -13,7 +13,9 @@ import React, { useContext, useState, useEffect } from "react";
 import GetItemsAdmin from "../../getItemAdmin";
 
 const ClientAdmin = () => {
+
     const [clientDetails, setClientDetails] = useState([]);
+
 
 
     useEffect(() => {
@@ -29,7 +31,9 @@ const ClientAdmin = () => {
     }, []);
     
     
+
     console.log(teamDetails)
+
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     
@@ -72,7 +76,9 @@ const ClientAdmin = () => {
             <Header title="Team" subtitle="Managing the Team" />
             <Box>
                 <DataGrid
+
                     rows={teamDetails}
+
                     columns={columns}
                     pageSize={12}
                 />

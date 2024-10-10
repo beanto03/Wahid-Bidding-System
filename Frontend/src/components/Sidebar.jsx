@@ -12,9 +12,12 @@ import {
   Avatar,
   Box,
 } from '@mui/material';
-import { height, styled, width } from '@mui/system';
+
+import { styled } from '@mui/system';
 import GavelIcon from '@mui/icons-material/Gavel';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import SettingsIcon from '@mui/icons-material/Settings';
+
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
@@ -55,9 +58,11 @@ const HeaderTypography = styled(Typography)(({ theme }) => ({
 }));
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
+
   color: 'red',
   '&:hover': {
     backgroundColor: 'rgba(566, 35, 250, 0.1)',
+
     cursor: 'pointer',
   },
 }));
@@ -75,12 +80,14 @@ function Sidebar() {
       <Toolbar />
       <ProfileBox>
         <StyledAvatar alt="Profile Picture" src="https://via.placeholder.com/150" />
+
         <HeaderTypography variant="h6">Aiman Doe</HeaderTypography>
         <HeaderTypography variant="body2">aimanDoe@gmail.com</HeaderTypography>
       </ProfileBox>
       <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)', marginBottom: 2 }} />
       <List>
         <StyledListItem button onClick={() => handleNavigation('/biddingPage')}>
+
           <ListItemIcon>
             <GavelIcon sx={{ color: 'white' }} />
           </ListItemIcon>
@@ -92,6 +99,14 @@ function Sidebar() {
           </ListItemIcon>
           <ListItemText primary="My Bids" sx={{ color: 'white' }} />
         </StyledListItem>
+
+        <StyledListItem button onClick={() => handleNavigation('/settings')}>
+          <ListItemIcon>
+            <SettingsIcon sx={{ color: 'white' }} />
+          </ListItemIcon>
+          <ListItemText primary="Settings" sx={{ color: 'white' }} />
+        </StyledListItem>
+
         <StyledListItem button onClick={() => handleNavigation('/login')}>
           <ListItemIcon>
             <LogoutIcon sx={{ color: 'white' }} />
@@ -103,4 +118,6 @@ function Sidebar() {
   );
 }
 
+
 export default Sidebar;
+

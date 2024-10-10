@@ -15,7 +15,10 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AuthService from '../../Auth/AuthService';
 import { purple, blue, pink } from '@mui/material/colors';
+
+
 import { buildingImage } from '../../assets/images';
+
 
 function Copyright(props) {
   return (
@@ -51,11 +54,13 @@ export default function SignInSide() {
 
     try {
       const success = await AuthService.login(email, password);
-      const userType = await localStorage.getItem('userType');
 
-      if (success && userType === '1') {
-        navigate('/dashboard-admin');
-      } else if (success && userType === '2') {
+      const userType = localStorage.getItem('usertype');
+
+      if (success && userType === '0') {
+        navigate('/biddingPage');
+      } else if (success && userType === '1') {
+
         navigate('/dashboard-staff');
       } else {
         alert('Login failed. Please check your credentials.');
@@ -69,6 +74,7 @@ export default function SignInSide() {
   return (
     <ThemeProvider theme={theme}>
       <Box
+
        sx={{
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
@@ -84,12 +90,15 @@ export default function SignInSide() {
 
     
       <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+
+          height: '100vh', // Full height of the viewport
+          backgroundImage: 'url(https://source.unsplash.com/random?colors)',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: (t) => t.palette.grey[200],
+=======
           height: '90vh', // Full height of the viewport    
           backgroundRepeat: 'no-repeat',
+
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -223,7 +232,7 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Box>
-      </Box>
+
     </ThemeProvider>
   );
 }

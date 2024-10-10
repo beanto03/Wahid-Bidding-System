@@ -61,11 +61,11 @@ function CustomerBiddingDashboard() {
   }, []);
 
   return (
-    <>  
-     
+
+    <>
       {/* Sidebar Header */}
        <Sidebar />
-      
+
       {/* Main Content */}
       <ContentBox>
         <Grid container spacing={4}>

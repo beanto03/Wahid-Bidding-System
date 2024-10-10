@@ -6,10 +6,12 @@ import profileAvatar from '../../../assets/profile-avatar.png';
 import { tokens } from "../../../base/theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -76,7 +78,9 @@ const SidebarManager = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
+
                   Seller 
+
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -98,6 +102,7 @@ const SidebarManager = () => {
               </Box>
               <Box textAlign="center">
                 <Typography
+
                   variant="h1"
                   color={colors.blueAccent[100]}
                   fontWeight="bold"
@@ -107,6 +112,7 @@ const SidebarManager = () => {
                 </Typography>
                 <Typography variant="h2" color={colors.greenAccent[500]}>
                   Management
+
                 </Typography>
               </Box>
             </Box>
@@ -114,7 +120,9 @@ const SidebarManager = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
+
               title="Home"
+
               to="/dashboard-staff"
               icon={<HomeOutlinedIcon />}
               selected={selected}
@@ -129,6 +137,7 @@ const SidebarManager = () => {
               Users
             </Typography>
             <Item
+
               title="Add Product"
               to="/team-manager"
               icon={<AddBoxIcon />}
@@ -140,6 +149,7 @@ const SidebarManager = () => {
               title="Logout"
               to="/login"
               icon={<ExitToAppIcon />}
+
               selected={selected}
               setSelected={setSelected}
             />
