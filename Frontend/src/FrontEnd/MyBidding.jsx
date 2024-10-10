@@ -55,11 +55,23 @@ const StyledCard = styled(Card)({
 
     return (
         <>
+
+
           {/* Sidebar Header */}
            <Sidebar />
-    
           {/* Main Content */}
-          <ContentBox>
+    
+          <ContentBox
+            sx={{
+              minHeight: '100vh',
+              background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: 4,
+              boxSizing: 'border-box',
+            }}>
+
             <Grid container spacing={4}>
               {biddingData.map((item) => (
                 <Grid item key={item.id} xs={12} sm={6} md={4}>
