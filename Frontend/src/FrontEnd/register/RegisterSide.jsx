@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AuthService from '../../Auth/AuthService';  // Adjust this according to your service location
 import { useNavigate } from 'react-router-dom';
 import { purple, blue, pink } from '@mui/material/colors';
+import { buildingImage } from '../../assets/images';
 
 function Copyright(props) {
   return (
@@ -81,16 +82,28 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Box
+       sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+        backgroundImage: `url(${buildingImage})`,
+        backgroundSize: 'cover',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: 4,
+        boxSizing: 'border-box',
+      }}
+      >
       <Grid 
         container 
         component="main" 
         sx={{ 
-          height: '100vh', 
+          height: '90vh', 
           justifyContent: 'center', // Center horizontally
           alignItems: 'center', // Center vertically
           backgroundImage: 'url(https://source.unsplash.com/random?technology)',
           backgroundRepeat: 'no-repeat',
-          backgroundColor: (t) => t.palette.grey[200],
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -293,6 +306,7 @@ export default function Register() {
           </Box>
         </Grid>
       </Grid>
+      </Box>
     </ThemeProvider>
   );
 }

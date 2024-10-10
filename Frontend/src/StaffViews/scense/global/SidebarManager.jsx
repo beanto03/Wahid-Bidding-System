@@ -6,15 +6,10 @@ import profileAvatar from '../../../assets/profile-avatar.png';
 import { tokens } from "../../../base/theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
-import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
-import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -81,7 +76,7 @@ const SidebarManager = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  Admins
+                  Seller 
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -103,15 +98,15 @@ const SidebarManager = () => {
               </Box>
               <Box textAlign="center">
                 <Typography
-                  variant="h2"
-                  color={colors.grey[100]}
+                  variant="h1"
+                  color={colors.blueAccent[100]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                 Managment
+                 Seller
                 </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Manager
+                <Typography variant="h2" color={colors.greenAccent[500]}>
+                  Management
                 </Typography>
               </Box>
             </Box>
@@ -119,7 +114,7 @@ const SidebarManager = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
-              title="Dashboard"
+              title="Home"
               to="/dashboard-staff"
               icon={<HomeOutlinedIcon />}
               selected={selected}
@@ -134,91 +129,17 @@ const SidebarManager = () => {
               Users
             </Typography>
             <Item
-              title="Manage Team"
+              title="Add Product"
               to="/team-manager"
-              icon={<PeopleOutlinedIcon />}
+              icon={<AddBoxIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+
             <Item
-              title="Clients"
-              to="/clients"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-            Transactions
-            </Typography>
-            <Item
-              title="Transactions"
-              to="/transactions-manager"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Drivers Input"
-              to="/drivers-input"
-              icon={<LocalShippingIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-            Trip Info
-            </Typography>
-            <Item
-              title="Fuel"
-              to="/transactions-manager"
-              icon={<LocalGasStationIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Suburbs"
-              to="/suburbs-manager"
-              icon={<HolidayVillageIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            ></Typography>
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Bookkeeping and Accounting
-            </Typography>
-            <Item
-              title="Projects"
-              to="/projects"
-              icon={<AccountTreeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Accounting"
-              to="/accounting"
-              icon={<CalculateOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Documents"
-              to="/documents"
-              icon={<DocumentScannerOutlinedIcon />}
+              title="Logout"
+              to="/login"
+              icon={<ExitToAppIcon />}
               selected={selected}
               setSelected={setSelected}
             />
