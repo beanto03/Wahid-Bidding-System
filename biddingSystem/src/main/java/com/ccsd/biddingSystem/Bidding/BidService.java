@@ -1,14 +1,15 @@
 package com.ccsd.biddingSystem.Bidding;
 
-import com.ccsd.biddingSystem.Product.Product;
-import com.ccsd.biddingSystem.Product.ProductRepository;
-import com.ccsd.biddingSystem.History.HistoryService; // Import HistoryService
+import java.util.Comparator; // Import HistoryService
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.List; // For List
-import java.util.Comparator; // For Comparator
+import com.ccsd.biddingSystem.History.HistoryService;
+import com.ccsd.biddingSystem.ProductSeller.Product; // For List
+import com.ccsd.biddingSystem.ProductSeller.ProductRepository; // For Comparator
 
 @Service
 public class BidService {

@@ -1,5 +1,5 @@
 //Product.java
-package com.ccsd.biddingSystem.Product;
+package com.ccsd.biddingSystem.ProductSeller;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
