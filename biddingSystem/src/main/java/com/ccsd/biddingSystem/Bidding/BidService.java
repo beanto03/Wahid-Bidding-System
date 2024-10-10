@@ -23,6 +23,7 @@ public class BidService {
     @Autowired
     private HistoryService historyService; // Inject HistoryService
 
+    // Method to place a bid
     public String placeBid(String productId, String buyerId, double bidAmount) {
         // Find the product by ID
         Optional<Product> productOpt = productRepository.findById(productId);
@@ -48,28 +49,40 @@ public class BidService {
         bid.setAmount(bidAmount);
         bidRepository.save(bid);
 
-        // Save the winning bid in history
-        historyService.saveHistory(buyerId, productId, bidAmount); // Save to history
-
         return "Bid placed successfully!";
     }
 
-    public void checkWinningBid(String productId, String buyerId) {
+    // Method to finalize bidding, notify the winner, and inform other bidders
+    public String finalizeBidding(String productId) {
         List<Bid> bids = bidRepository.findAllByProductId(productId);
         if (bids.isEmpty()) {
-            System.out.println("No bids placed for product: " + productId);
-            return;
+            return "No bids placed for product: " + productId;
         }
 
-        // Find the highest bid
+        // Find the highest bid (winner)
         Bid winningBid = bids.stream()
             .max(Comparator.comparingDouble(Bid::getAmount))
             .orElse(null);
 
-        if (winningBid != null && winningBid.getBuyerId().equals(buyerId)) {
-            System.out.println("Congratulations! You have won the bid for product: " + productId);
-        } else {
-            System.out.println("The highest bid for product " + productId + " was placed by user: " + winningBid.getBuyerId());
+        if (winningBid != null) {
+            // Save the winning bid to history
+            historyService.saveHistory(winningBid.getBuyerId(), productId, winningBid.getAmount());
+
+            // Notify the winning buyer
+            String winnerMessage = "Congratulations! Buyer " + winningBid.getBuyerId() + " has won the product: " + productId + " with a bid of " + winningBid.getAmount() + ".";
+            System.out.println(winnerMessage);
+
+            // Notify the non-winning buyers
+            for (Bid bid : bids) {
+                if (!bid.getBuyerId().equals(winningBid.getBuyerId())) {
+                    String nonWinnerMessage = "Sorry, Buyer " + bid.getBuyerId() + ", you did not win the bid for product: " + productId + ". Your bid was: " + bid.getAmount() + ".";
+                    System.out.println(nonWinnerMessage);
+                }
+            }
+
+            return winnerMessage; // Return the winning message for the UI or Postman
         }
+
+        return "No winning bid found.";
     }
 }

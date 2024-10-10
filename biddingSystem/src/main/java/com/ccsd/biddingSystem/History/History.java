@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "history")
 public class History {
     @Id
-    private String id;
-    private String userId;
+    private String historyId;
+    private String buyerId;
     private String productId;
     private double bidAmount;
 
@@ -16,27 +16,27 @@ public class History {
     }
 
     // Constructor
-    public History(String userId, String productId, double bidAmount) {
-        this.userId = userId;
+    public History(String buyerId, String productId, double bidAmount) {
+        this.buyerId = buyerId;
         this.productId = productId;
         this.bidAmount = bidAmount;
     }
 
     // Getters and Setters
-    public String getId() {
-        return id;
+    public String getHistoryId() {
+        return historyId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setHistoryId(String historyId) {
+        this.historyId = historyId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getBuyerId() {
+        return buyerId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setBuyerId(String buyerId) {
+        this.buyerId = buyerId;
     }
 
     public String getProductId() {

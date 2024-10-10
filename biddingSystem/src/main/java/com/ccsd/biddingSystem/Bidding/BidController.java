@@ -19,4 +19,6 @@ public class BidController {
     return ResponseEntity.ok(response);
 }
 
+//akan ada part fetch data for history (nanti tengok balik) check dekat chatgpt
+
 }
