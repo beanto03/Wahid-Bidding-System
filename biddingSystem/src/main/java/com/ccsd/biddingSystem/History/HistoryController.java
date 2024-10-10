@@ -12,11 +12,10 @@ public class HistoryController {
     @Autowired
     private HistoryService historyService;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<History>> getUserHistory(@PathVariable String userId) {
-        List<History> history = historyService.getUserHistory(userId);
+    @GetMapping("/{buyerId}")
+    public ResponseEntity<List<History>> getBuyerHistory(@PathVariable String buyerId) {
+        List<History> history = historyService.getBuyerHistory(buyerId);
         return ResponseEntity.ok(history);
     }
 
-    // You can add more endpoints as needed
 }

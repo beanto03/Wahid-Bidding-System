@@ -1,4 +1,4 @@
-package com.ccsd.biddingSystem.Bidding;
+package com.ccsd.biddingSystem.BiddingBuyer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,5 +18,7 @@ public class BidController {
     String response = bidService.placeBid(productId, buyerId, bidAmount);
     return ResponseEntity.ok(response);
 }
+
+//akan ada part fetch data for history (nanti tengok balik) check dekat chatgpt
 
 }

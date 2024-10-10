@@ -1,4 +1,4 @@
-package com.ccsd.biddingSystem.Bidding;
+package com.ccsd.biddingSystem.BiddingBuyer;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;

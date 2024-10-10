@@ -10,13 +10,13 @@ public class HistoryService {
     @Autowired
     private HistoryRepository historyRepository;
 
-    public List<History> getUserHistory(String userId) {
-        return historyRepository.findByUserId(userId);
+    public List<History> getBuyerHistory(String buyerId) {
+        return historyRepository.findByBuyerId(buyerId);
     }
 
     // Method to save a history record (you can call this when a bid is won)
-    public void saveHistory(String userId, String productId, double bidAmount) {
-        History history = new History(userId, productId, bidAmount);
+    public void saveHistory(String buyerId, String productId, double bidAmount) {
+        History history = new History(buyerId, productId, bidAmount);
         historyRepository.save(history);
     }
 }

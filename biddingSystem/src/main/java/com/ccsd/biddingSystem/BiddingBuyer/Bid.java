@@ -1,4 +1,4 @@
-package com.ccsd.biddingSystem.Bidding;
+package com.ccsd.biddingSystem.BiddingBuyer;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
