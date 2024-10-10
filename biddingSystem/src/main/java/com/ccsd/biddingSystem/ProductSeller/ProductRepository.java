@@ -1,6 +1,6 @@
 
 // ProductRepository.java
-package com.ccsd.biddingSystem.Product;
+package com.ccsd.biddingSystem.ProductSeller;
 
 import java.util.List;
 
