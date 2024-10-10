@@ -1,9 +1,7 @@
 package com.ccsd.biddingSystem.Buyer;
 
-// import com.ccsd.biddingSystem.Buyer.Buyer;
-// import com.ccsd.biddingSystem.Buyer.BuyerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+//import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +14,7 @@ public class BuyerService {
     public Buyer login(String email, String password) {
         // Look up the buyer by email
         Buyer buyer = buyerRepository.findByEmail(email);
-        if (buyer != null && BCrypt.checkpw(password, buyer.getPassword())) {
+        if (buyer != null && buyer.getPassword().equals(password)) {
             return buyer;  // Successful login
         }
         return null;  // Login failed
@@ -27,8 +25,7 @@ public class BuyerService {
         // Check if the email already exists
         if (buyerRepository.findByEmail(buyer.getEmail()) == null) {
             // Hash the password before saving
-            String hashedPassword = BCrypt.hashpw(buyer.getPassword(), BCrypt.gensalt());
-            buyer.setPassword(hashedPassword);
+            buyer.setPassword(buyer.getPassword());
             buyerRepository.save(buyer);
             return true; // Registration successful
         }

@@ -1,6 +1,5 @@
 package com.ccsd.biddingSystem.Seller;
 
-//import com.ccsd.biddingSystem.Buyer.Buyer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface SellerRepository extends MongoRepository<Seller, String> {

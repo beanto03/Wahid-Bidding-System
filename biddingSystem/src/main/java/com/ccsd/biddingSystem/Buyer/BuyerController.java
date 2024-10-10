@@ -1,7 +1,5 @@
 package com.ccsd.biddingSystem.Buyer;
 
-//import com.ccsd.biddingSystem.Buyer.Buyer;
-//import com.ccsd.biddingSystem.Buyer.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

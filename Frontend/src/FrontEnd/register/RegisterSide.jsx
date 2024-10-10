@@ -69,7 +69,7 @@ export default function Register() {
     try {
       const success = await AuthService.register({ name, email, password, role });
       if (success) {
-        navigate("/dashboard-user");  // After successful registration, navigate to user dashboard
+        navigate("/login");  // After successful registration, navigate to user dashboard
       } else {
         alert("Registration failed. Please try again.");
       }
@@ -255,7 +255,7 @@ export default function Register() {
                       row
                     >
                       <FormControlLabel value="seller" control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Seller" />
-                      <FormControlLabel value="bidder" control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Bidder" />
+                      <FormControlLabel value="buyer" control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Bidder" />
                     </RadioGroup>
                   </FormControl>
                 </Grid>

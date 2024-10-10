@@ -1,13 +1,11 @@
 package com.ccsd.biddingSystem.Seller;
 
-//import com.ccsd.biddingSystem.Buyer.Buyer;
-//import com.ccsd.biddingSystem.Buyer.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/buyers")
+@RequestMapping("/api/sellers")
 public class SellerController {
 
     @Autowired

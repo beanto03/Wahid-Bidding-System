@@ -1,20 +1,26 @@
 package com.ccsd.biddingSystem.Buyer;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "buyers")
+
 public class Buyer {
-    private String id;
+    @Id
+    private String buyerId;
     private String name;
     private String email;
     private String password;
     private String phoneNum;
-    // private int role;  // "0=buyer" or "1=seller"
+    private int role;  // "0=buyer" or "1=seller"
 
     // Getters and Setters
-    public String getId(){
-        return id;
+    public String getBuyerId(){
+        return buyerId;
     }
 
-    public void setId(String id){
-        this.id = id;
+    public void setBuyerId(String id){
+        this.buyerId = buyerId;
     }
 
     public String getName(){
@@ -49,5 +55,12 @@ public class Buyer {
         this.phoneNum = phoneNum;
     }
 
+    public int getRole(){
+        return role;
+    }
+
+    public void setRole(int role){
+        this.role = role;
+    }
    
 }

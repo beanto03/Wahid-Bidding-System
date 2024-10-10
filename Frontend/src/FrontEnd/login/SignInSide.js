@@ -50,11 +50,11 @@ export default function SignInSide() {
 
     try {
       const success = await AuthService.login(email, password);
-      const userType = await localStorage.getItem('userType');
+      const userType = localStorage.getItem('usertype');
 
-      if (success && userType === '1') {
-        navigate('/dashboard-admin');
-      } else if (success && userType === '2') {
+      if (success && userType === '0') {
+        navigate('/biddingPage');
+      } else if (success && userType === '1') {
         navigate('/dashboard-staff');
       } else {
         alert('Login failed. Please check your credentials.');

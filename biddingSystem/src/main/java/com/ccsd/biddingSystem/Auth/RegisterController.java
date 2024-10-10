@@ -1,12 +1,13 @@
 package com.ccsd.biddingSystem.Auth;
 
-// import com.ccsd.biddingSystem.Auth.Register;
-// import com.ccsd.biddingSystem.Auth.RegisterService; // Update to your actual service package
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+
 @RequestMapping("/api/register")
 public class RegisterController {
 
@@ -18,7 +19,7 @@ public class RegisterController {
         boolean isRegistered = registerService.register(register);
 
         if (isRegistered) {
-            return ResponseEntity.ok(register.getRole() + " registered successfully!");
+            return ResponseEntity.ok(register.getRole() + " mregistered successfully!");
         } else {
             return ResponseEntity.status(400).body("Registration failed. Email might already exist.");
         }

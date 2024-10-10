@@ -5,7 +5,6 @@ import com.ccsd.biddingSystem.Buyer.BuyerRepository;
 import com.ccsd.biddingSystem.Seller.Seller;
 import com.ccsd.biddingSystem.Seller.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,8 +22,9 @@ public class RegisterService {
             if (buyerRepository.findByEmail(register.getEmail()) == null) {
                 Buyer buyer = new Buyer();
                 buyer.setEmail(register.getEmail());
-                buyer.setPassword(BCrypt.hashpw(register.getPassword(), BCrypt.gensalt())); // Hash the password
+                buyer.setPassword(register.getPassword());
                 buyer.setName(register.getName());
+                buyer.setRole(register.getRole());
                 buyerRepository.save(buyer);
                 return true;
             }
@@ -33,8 +33,9 @@ public class RegisterService {
             if (sellerRepository.findByEmail(register.getEmail()) == null) {
                 Seller seller = new Seller();
                 seller.setEmail(register.getEmail());
-                seller.setPassword(BCrypt.hashpw(register.getPassword(), BCrypt.gensalt())); // Hash the password
+                seller.setPassword(register.getPassword()); // Hash the password
                 seller.setName(register.getName());
+                seller.setRole(register.getRole());
                 sellerRepository.save(seller);
                 return true;
             }
