@@ -1,13 +1,11 @@
 package com.ccsd.biddingSystem.Bidding;
 
-import java.util.Comparator; // Import HistoryService
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ccsd.biddingSystem.History.HistoryService;
+import com.ccsd.biddingSystem.BidHistory.BidHistoryService;
 import com.ccsd.biddingSystem.ProductSeller.Product; // For List
 import com.ccsd.biddingSystem.ProductSeller.ProductRepository; // For Comparator
 
@@ -21,7 +19,7 @@ public class BidService {
     private ProductRepository productRepository;
 
     @Autowired
-    private HistoryService historyService; // Inject HistoryService
+    private BidHistoryService bidHistoryService; // Inject HistoryService
 
     // Method to place a bid
     public String placeBid(String productId, String buyerId, double bidAmount) {
@@ -49,40 +47,40 @@ public class BidService {
         bid.setAmount(bidAmount);
         bidRepository.save(bid);
 
+        // Update the highest bid in the highest bid history collection
+        bidHistoryService.saveBidHistory(productId, buyerId, bidAmount);
+
         return "Bid placed successfully!";
     }
 
-    // Method to finalize bidding, notify the winner, and inform other bidders
-    public String finalizeBidding(String productId) {
-        List<Bid> bids = bidRepository.findAllByProductId(productId);
-        if (bids.isEmpty()) {
-            return "No bids placed for product: " + productId;
+    /* 
+    //method to check if the bidding has ended and notify buyers
+    public String checkBidEnd(String productId){
+        Optional<Product> productOpt = productRepository.findById(productId);
+        if (!productOpt.isPresent()){
+            return "Product not found";
         }
 
-        // Find the highest bid (winner)
-        Bid winningBid = bids.stream()
-            .max(Comparator.comparingDouble(Bid::getAmount))
-            .orElse(null);
+        Product product = productOpt.get();
 
-        if (winningBid != null) {
-            // Save the winning bid to history
-            historyService.saveHistory(winningBid.getBuyerId(), productId, winningBid.getAmount());
+        // Check if bidding has ended (assuming endTime is stored in the product)
+        long currentTime = System.currentTimeMillis();
+        if (currentTime > product.getEndTime()) { // Assuming getEndTime() exists in Product
 
-            // Notify the winning buyer
-            String winnerMessage = "Congratulations! Buyer " + winningBid.getBuyerId() + " has won the product: " + productId + " with a bid of " + winningBid.getAmount() + ".";
-            System.out.println(winnerMessage);
+            // Find the highest bid
+            Bid highestBid = bidRepository.findAllByProductId(productId)
+                .stream()
+                .max((b1, b2) -> Double.compare(b1.getAmount(), b2.getAmount()))
+                .orElse(null);
 
-            // Notify the non-winning buyers
-            for (Bid bid : bids) {
-                if (!bid.getBuyerId().equals(winningBid.getBuyerId())) {
-                    String nonWinnerMessage = "Sorry, Buyer " + bid.getBuyerId() + ", you did not win the bid for product: " + productId + ". Your bid was: " + bid.getAmount() + ".";
-                    System.out.println(nonWinnerMessage);
-                }
+            if (highestBid != null) {
+                String winner = highestBid.getBuyerId();
+                // Notify all buyers (this could be implemented with actual notifications or logs)
+                return "Bidding ended! Winner: " + winner;
             }
-
-            return winnerMessage; // Return the winning message for the UI or Postman
+            return "Bidding ended! No bids placed.";
         }
 
-        return "No winning bid found.";
-    }
+        return "Bidding is still ongoing.";
+    }*/
 }

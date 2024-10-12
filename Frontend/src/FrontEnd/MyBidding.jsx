@@ -1,103 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import IconButton from '@mui/material/IconButton';
-import { Typography, Grid, Card, CardMedia, CardContent, Box } from '@mui/material';
-import { styled } from '@mui/system';
-
+import React, { useEffect, useState } from 'react';
+import { Card, CardContent, Typography, Grid, Button, CircularProgress } from '@mui/material';
+import config from '../config';
 import Sidebar from '../components/Sidebar';
 
-// Mock Data
-const mockData = [
-    {
-      id: 1,
-      userID : "john doe",
-      productImage: "https://static.zerochan.net/Takamachi.Nanoha.full.3408942.jpg",
-      productPrice: "$100",
-      timeLeft: "2h 30m",
-      contactSeller : "011-2983819",
-    },
-  
-  ];
+const BidHistoryPage = ({ }) => {
+  const [bidHistory, setBidHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [buyerId, setBuyerId] = useState(null);
+  const [productId, setProductId] = useState(null);
 
-  //design theme
-const StyledCard = styled(Card)({
-    backgroundColor: '#f5f5f5',
-    borderRadius: '12px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-    textAlign: 'center',
-  });
+  useEffect(() => {
+    const fetchBidHistory = async () => {
+      try {
+        const response = await fetch(`${config.backendUrl}/api/bidHistory/getBids`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        // setBidHistory(data);
+        setBuyerId(data);
+        setProductId(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const Font = styled(Typography)({
-    color: '#0ec96c',
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    marginLeft: '15px'
-  });
-  const PriceTag = styled(Typography)({
-    color: '#4caf50', // Green color for the price
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    marginTop: '10px',
-  });
-  
-  const ContentBox = styled(Box)({
-    marginLeft: 240, // Add margin to the right of the drawer
-    padding: '20px',
-  });
-  
-  
-  function MyBidding() {
-    const [biddingData, setBiddingData] = useState([]);
-  
-    useEffect(() => {
-      // You can replace this mock data with real data from an API.
-      setBiddingData(mockData);
-    }, []);
+    fetchBidHistory();
+  }, [buyerId, productId]);
 
-    return (
-        <>
+  if (loading) {
+    return <CircularProgress />;
+  }
 
+  if (error) {
+    return <Typography>Error loading bid history: {error}</Typography>;
+  }
 
-          {/* Sidebar Header */}
-           <Sidebar />
-          {/* Main Content */}
-    
-          <ContentBox
-            sx={{
-              minHeight: '100vh',
-              background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              padding: 4,
-              boxSizing: 'border-box',
-            }}>
-
-            <Grid container spacing={4}>
-              {biddingData.map((item) => (
-                <Grid item key={item.id} xs={12} sm={6} md={4}>
-                  <StyledCard>
-                    <CardMedia
-                      component="img"
-                      height="250"
-                      image={item.productImage}
-                      alt="Product Image"
-                    />
-                    <CardContent>
-                      <Font>
-                        {item.userID}
-                      </Font>
-                      <PriceTag>
-                        {item.productPrice}
-                      </PriceTag>
-                      <IconButton variant="outlined" href="whatsapp.com"  >  Contact Seller</IconButton>
-                    </CardContent>
-                  </StyledCard>
-                </Grid>
-              ))}
-            </Grid>
-      </ContentBox>
-    </>
+  return (
+    <Grid container spacing={3} style={{ padding: '20px' }}>
+      <Sidebar />
+      {bidHistory.length > 0 ? (
+        bidHistory.map((bid) => (
+          <Grid item xs={12} sm={6} md={4} key={bid.id}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" component="div">
+                  Product: {bid.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Current Highest Bid: ${bid.highestAmount}
+                </Typography>
+                <Button variant="contained" color="primary">
+                  Contact Seller
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))
+      ) : (
+        <Typography>No bid history found.</Typography>
+      )}
+    </Grid>
   );
-}
+};
 
-export default MyBidding;
+export default BidHistoryPage;
