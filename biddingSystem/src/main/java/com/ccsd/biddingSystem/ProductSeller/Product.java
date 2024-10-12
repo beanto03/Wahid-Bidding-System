@@ -1,5 +1,6 @@
-//Product.java
 package com.ccsd.biddingSystem.ProductSeller;
+
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +13,8 @@ public class Product {
     private String description;
     private double startingBid;
     private double currentBid;
-    private String sellerId; // Link the product to the seller~
+    private String sellerId;
+    private List<String> imageBase64Strings; // Updated to store Base64 strings
 
     // Getters and Setters
     public String getProductId() {
@@ -61,5 +63,13 @@ public class Product {
 
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId;
+    }
+
+    public List<String> getImageBase64Strings() {
+        return imageBase64Strings;
+    }
+
+    public void setImageBase64Strings(List<String> imageBase64Strings) {
+        this.imageBase64Strings = imageBase64Strings;
     }
 }
