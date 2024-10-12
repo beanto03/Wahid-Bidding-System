@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Grid, Button, CircularProgress } from '@mui/material';
 import config from '../config';
 import Sidebar from '../components/Sidebar';
+import axios from 'axios';
 
 const BidHistoryPage = ({ }) => {
   const [bidHistory, setBidHistory] = useState([]);
