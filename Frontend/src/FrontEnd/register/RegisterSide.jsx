@@ -273,13 +273,11 @@ export default function Register() {
                       aria-label="role"
                       name="role"
                       value={role}
-                      onChange={(e) => setRole(Number(e.target.value))}
+                      onChange={(e) => setRole(e.target.value)}  // Ensure value is converted to a number
                       row
-                    >
-                      <FormControlLabel value={1} control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Seller" />
-
-                      <FormControlLabel value={0} control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Bidder" />
-
+                    > 
+                    <FormControlLabel value={"seller"} control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Seller" />
+                    <FormControlLabel value={"buyer"} control={<Radio sx={{ color: 'white', '&.Mui-checked': { color: pink[300] } }} />} label="Bidder" />
                     </RadioGroup>
                   </FormControl>
                 </Grid>
