@@ -17,7 +17,7 @@ public class BuyerController {
         if (isRegistered) {
             return ResponseEntity.ok("Buyer registered successfully.");
         } else {
-            return ResponseEntity.status(400).body("Registration failed. Email might already exist.");
+            return ResponseEntity.status(400).body("Buyer registration failed. Email might already exist.");
         }
     }
     

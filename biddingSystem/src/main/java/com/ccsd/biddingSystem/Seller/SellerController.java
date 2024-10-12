@@ -15,7 +15,7 @@ public class SellerController {
     public ResponseEntity<String> registerSeller(@RequestBody Seller seller) {
         boolean isRegistered = sellerService.registerSeller(seller);
         if (isRegistered) {
-            return ResponseEntity.ok("Buyer registered successfully.");
+            return ResponseEntity.ok("Seller registered successfully.");
         } else {
             return ResponseEntity.status(400).body("Registration failed. Email might already exist.");
         }

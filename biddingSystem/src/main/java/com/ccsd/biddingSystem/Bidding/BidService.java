@@ -1,14 +1,13 @@
 package com.ccsd.biddingSystem.Bidding;
 
-import com.ccsd.biddingSystem.Product.Product;
-import com.ccsd.biddingSystem.Product.ProductRepository;
-import com.ccsd.biddingSystem.History.HistoryService; // Import HistoryService
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.List; // For List
-import java.util.Comparator; // For Comparator
+import com.ccsd.biddingSystem.BidHistory.BidHistoryService;
+import com.ccsd.biddingSystem.ProductSeller.Product; // For List
+import com.ccsd.biddingSystem.ProductSeller.ProductRepository; // For Comparator
 
 @Service
 public class BidService {
@@ -20,8 +19,9 @@ public class BidService {
     private ProductRepository productRepository;
 
     @Autowired
-    private HistoryService historyService; // Inject HistoryService
+    private BidHistoryService bidHistoryService; // Inject HistoryService
 
+    // Method to place a bid
     public String placeBid(String productId, String buyerId, double bidAmount) {
         // Find the product by ID
         Optional<Product> productOpt = productRepository.findById(productId);
@@ -47,28 +47,40 @@ public class BidService {
         bid.setAmount(bidAmount);
         bidRepository.save(bid);
 
-        // Save the winning bid in history
-        historyService.saveHistory(buyerId, productId, bidAmount); // Save to history
+        // Update the highest bid in the highest bid history collection
+        bidHistoryService.saveBidHistory(productId, buyerId, bidAmount);
 
         return "Bid placed successfully!";
     }
 
-    public void checkWinningBid(String productId, String buyerId) {
-        List<Bid> bids = bidRepository.findAllByProductId(productId);
-        if (bids.isEmpty()) {
-            System.out.println("No bids placed for product: " + productId);
-            return;
+    /* 
+    //method to check if the bidding has ended and notify buyers
+    public String checkBidEnd(String productId){
+        Optional<Product> productOpt = productRepository.findById(productId);
+        if (!productOpt.isPresent()){
+            return "Product not found";
         }
 
-        // Find the highest bid
-        Bid winningBid = bids.stream()
-            .max(Comparator.comparingDouble(Bid::getAmount))
-            .orElse(null);
+        Product product = productOpt.get();
 
-        if (winningBid != null && winningBid.getBuyerId().equals(buyerId)) {
-            System.out.println("Congratulations! You have won the bid for product: " + productId);
-        } else {
-            System.out.println("The highest bid for product " + productId + " was placed by user: " + winningBid.getBuyerId());
+        // Check if bidding has ended (assuming endTime is stored in the product)
+        long currentTime = System.currentTimeMillis();
+        if (currentTime > product.getEndTime()) { // Assuming getEndTime() exists in Product
+
+            // Find the highest bid
+            Bid highestBid = bidRepository.findAllByProductId(productId)
+                .stream()
+                .max((b1, b2) -> Double.compare(b1.getAmount(), b2.getAmount()))
+                .orElse(null);
+
+            if (highestBid != null) {
+                String winner = highestBid.getBuyerId();
+                // Notify all buyers (this could be implemented with actual notifications or logs)
+                return "Bidding ended! Winner: " + winner;
+            }
+            return "Bidding ended! No bids placed.";
         }
-    }
+
+        return "Bidding is still ongoing.";
+    }*/
 }

@@ -1,16 +1,15 @@
-
 // App.js
-
 
 import { Routes, Route } from "react-router-dom";
 import SignInSide from "./FrontEnd/login/SignInSide";
-import StaffPages from "./StaffPages";
 import Home from "./FrontEnd/others/Home";
-import RegisterSide from "./FrontEnd/register/RegisterSide"
-import CustomerBiddingDashboard from "./FrontEnd/CustomerPage"
-import MyBidding from "./FrontEnd/MyBidding"
+import RegisterSide from "./FrontEnd/register/RegisterSide";
+import MyBidding from "./FrontEnd/MyBidding";
 
 function App() {
+  // const [buyerId, setBuyerId] = useState(null);
+  // const [productId, setProductId] = useState(null);
+
   return (
     <>
 
@@ -36,16 +35,13 @@ function App() {
       element= {<RegisterSide/>}    
     />  
 
-   <Route
-      path="/dashboard-customer"
-      element= {<CustomerBiddingDashboard/>}    
-    /> 
 
     <Route
       path="/biddingHistory"
       element= {<MyBidding/>}    
     />   
     </Routes>
+      <AdminPages />
       <StaffPages />
       </>
 

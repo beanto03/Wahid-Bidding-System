@@ -47,6 +47,7 @@ const theme = createTheme({
 export default function SignInSide() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState(' ');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -55,21 +56,23 @@ export default function SignInSide() {
     try {
       const success = await AuthService.login(email, password);
 
-      const userType = localStorage.getItem('usertype');
-
-      if (success && userType === '0') {
-        navigate('/biddingPage');
-      } else if (success && userType === '1') {
-
-        navigate('/dashboard-staff');
-      } else {
-        alert('Login failed. Please check your credentials.');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      alert('An error occurred while logging in.');
+      if (success) {
+        const storedRole = localStorage.getItem('role');
+        if (storedRole === '0') {
+            navigate('/biddingPage');
+        } else if (storedRole === '1') {
+            navigate('/dashboard-staff');
+        } else {
+            alert('Login failed. Please check your credentials.');
+        }
+    } else {
+        alert('Login failed err. Please check your credentials.');
     }
-  };
+} catch (error) {
+    console.error('Login error:', error);
+    alert('An error occurred while logging in.');
+}
+};
 
   return (
     <ThemeProvider theme={theme}>
