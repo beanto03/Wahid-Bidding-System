@@ -100,13 +100,6 @@ function Sidebar() {
           <ListItemText primary="My Bids" sx={{ color: 'white' }} />
         </StyledListItem>
 
-        <StyledListItem button onClick={() => handleNavigation('/settings')}>
-          <ListItemIcon>
-            <SettingsIcon sx={{ color: 'white' }} />
-          </ListItemIcon>
-          <ListItemText primary="Settings" sx={{ color: 'white' }} />
-        </StyledListItem>
-
         <StyledListItem button onClick={() => handleNavigation('/login')}>
           <ListItemIcon>
             <LogoutIcon sx={{ color: 'white' }} />

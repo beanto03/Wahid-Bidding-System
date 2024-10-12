@@ -5,10 +5,7 @@ import { Link } from "react-router-dom";
 import profileAvatar from '../../../assets/profile-avatar.png';
 import { tokens } from "../../../base/theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
@@ -134,7 +131,7 @@ const SidebarManager = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Users
+              Product Management
             </Typography>
             <Item
 

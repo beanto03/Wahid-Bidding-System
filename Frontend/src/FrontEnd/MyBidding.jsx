@@ -4,19 +4,7 @@ import { Typography, Grid, Card, CardMedia, CardContent, Box } from '@mui/materi
 import { styled } from '@mui/system';
 
 import Sidebar from '../components/Sidebar';
-
-// Mock Data
-const mockData = [
-    {
-      id: 1,
-      userID : "john doe",
-      productImage: "https://static.zerochan.net/Takamachi.Nanoha.full.3408942.jpg",
-      productPrice: "$100",
-      timeLeft: "2h 30m",
-      contactSeller : "011-2983819",
-    },
-  
-  ];
+import axios from 'axios';
 
   //design theme
 const StyledCard = styled(Card)({
@@ -49,14 +37,20 @@ const StyledCard = styled(Card)({
     const [biddingData, setBiddingData] = useState([]);
   
     useEffect(() => {
-      // You can replace this mock data with real data from an API.
-      setBiddingData(mockData);
+      // Replace the URL with your API endpoint
+      axios
+        .get('http://api.example.com/biddings') // Placeholder URL
+        .then((response) => {
+          // Update the state with the fetched data     
+          setBiddingData(response.data);
+        })
+        .catch((error) => {
+          console.error('There was an error fetching the bidding data!', error);
+        });
     }, []);
 
     return (
         <>
-
-
           {/* Sidebar Header */}
            <Sidebar />
           {/* Main Content */}
@@ -89,7 +83,7 @@ const StyledCard = styled(Card)({
                       <PriceTag>
                         {item.productPrice}
                       </PriceTag>
-                      <IconButton variant="outlined" href="whatsapp.com"  >  Contact Seller</IconButton>
+                     
                     </CardContent>
                   </StyledCard>
                 </Grid>

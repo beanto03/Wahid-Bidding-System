@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Box, Grid, Card, CardMedia, CardContent, Typography, CircularProgress, Alert } from '@mui/material';
 import Header from "../../../components/Header";
@@ -58,7 +57,6 @@ const DashboardStaff = () => {
 
   return (
     <Box display="flex">
-
       {/* Main Content */}
       <Box m="20px" flex="1">
         {/* Header */}
@@ -75,26 +73,32 @@ const DashboardStaff = () => {
           <Alert severity="error">{error}</Alert>
         ) : (
           <Grid container spacing={4}>
-            {products.map((product) => (
-              <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                <StyledCard>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={product.productImage}
-                    alt={product.productName}
-                  />
-                  <CardContent>
-                    <ProductName variant="h6">
-                      {product.productName}
-                    </ProductName>
-                    <ProductPrice variant="body1">
-                      {product.productPrice}
-                    </ProductPrice>
-                  </CardContent>
-                </StyledCard>
-              </Grid>
-            ))}
+            {products.length > 0 ? (
+              products.map((product) => (
+                <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+                  <StyledCard>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={product.productImage}
+                      alt={product.productName}
+                    />
+                    <CardContent>
+                      <ProductName variant="h6">
+                        {product.productName}
+                      </ProductName>
+                      <ProductPrice variant="body1">
+                        {product.productPrice}
+                      </ProductPrice>
+                    </CardContent>
+                  </StyledCard>
+                </Grid>
+              ))
+            ) : (
+              <Typography variant="h6" align="center" style={{ width: '100%', marginTop: '20px' }}>
+                No products available.
+              </Typography>
+            )}
           </Grid>
         )}
       </Box>
@@ -102,6 +106,4 @@ const DashboardStaff = () => {
   );
 };
 
-
 export default DashboardStaff;
-
