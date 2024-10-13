@@ -38,8 +38,10 @@ const DashboardStaff = () => {
   // States for the new product form
   const [newProductName, setNewProductName] = useState('');
   const [newProductPrice, setNewProductPrice] = useState('');
-  const [newProductImage, setNewProductImage] = useState(null);
-  const [newProductDescription, setNewProductDescription] = useState('');
+
+  const [newProductImage, setNewProductImage] = useState(null); // State to store the image
+  const [newProductDescription, setNewProductDescription] = useState(''); // New state for description
+
   const [submitError, setSubmitError] = useState(null);
   const [submitLoading, setSubmitLoading] = useState(false);
 
@@ -224,6 +226,37 @@ const DashboardStaff = () => {
                 onChange={(e) => setNewProductImage(e.target.files[0])}
                 accept="image/*"
                 required
+              />
+            </Grid>
+              {/* New Description Field */}
+              <Grid item xs={12}>
+              <TextField
+                label="Product Description"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                value={newProductDescription}
+                onChange={(e) => setNewProductDescription(e.target.value)}
+                required
+                InputLabelProps={{
+                  style: { color: '#fff' },
+                }}
+                sx={{
+                  input: { color: '#fff' },
+                  textarea: { color: '#fff' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#fff',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#fff',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#fff',
+                    },
+                  },
+                }}
               />
             </Grid>
             <Grid item xs={12}>

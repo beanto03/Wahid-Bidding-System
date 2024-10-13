@@ -14,7 +14,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @PostMapping
+    @PostMapping(produces = "application/json")
 public ResponseEntity<?> login(@RequestBody Login loginRequest) {
     System.out.println("Login attempt received for email: " + loginRequest.getEmail());
     

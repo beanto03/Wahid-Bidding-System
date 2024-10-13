@@ -6,6 +6,7 @@ import Home from "./FrontEnd/others/Home";
 import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
 import StaffPages from "./StaffPages";
+
 import DashboardStaff from "./StaffViews/scense/drivers";
 
 function App() {
@@ -36,8 +37,6 @@ function App() {
       path="/register"
       element= {<RegisterSide/>}    
     />  
-
-
     <Route
       path="/biddingHistory"
       element= {<MyBidding/>}    
@@ -48,7 +47,9 @@ function App() {
     />
     </Routes>
     <StaffPages/>
+
       </>
+
 
   );
 }
