@@ -58,15 +58,19 @@ export default function SignInSide() {
 
       if (success) {
         const storedRole = localStorage.getItem('role');
+        console.log('Stored role: ', storedRole);
+
         if (storedRole === '0') {
             navigate('/biddingPage');
         } else if (storedRole === '1') {
             navigate('/dashboard-staff');
         } else {
-            alert('Login failed. Please check your credentials.');
+            alert('Login failed. Invalid role. Please check your credentials.');
+            localStorage.clear();
         }
     } else {
-        alert('Login failed err. Please check your credentials.');
+        alert('Login failed. Please check your credentials.');
+        localStorage.clear();
     }
 } catch (error) {
     console.error('Login error:', error);
@@ -77,6 +81,7 @@ export default function SignInSide() {
   return (
     <ThemeProvider theme={theme}>
       <Box
+      
 
        sx={{
         minHeight: '100vh',
