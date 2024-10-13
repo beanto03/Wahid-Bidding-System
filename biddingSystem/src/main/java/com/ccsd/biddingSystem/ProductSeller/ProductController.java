@@ -1,3 +1,4 @@
+// ProductController.java
 package com.ccsd.biddingSystem.ProductSeller;
 
 import java.util.List;
@@ -50,6 +51,9 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
+        // Log the received sellerId for debugging purposes
+        logger.info("Received product with sellerId: " + product.getSellerId()); // Debugging log
+
         try {
             Product createdProduct = productService.addProductWithImages(product, images);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
@@ -82,9 +86,11 @@ public class ProductController {
     }
 
     @PutMapping(value = "/update/{productId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Product> updateProduct(@PathVariable String productId,
-                                                 @RequestPart("product") String productString,
-                                                 @RequestPart("images") MultipartFile[] images) {
+    public ResponseEntity<Product> updateProduct(
+            @PathVariable String productId,
+            @RequestPart("product") String productString,
+            @RequestPart("images") MultipartFile[] images) {
+
         ObjectMapper objectMapper = new ObjectMapper();
         Product productDetails;
         try {

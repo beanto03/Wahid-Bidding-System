@@ -41,8 +41,6 @@ function App() {
       element= {<MyBidding/>}    
     />   
     </Routes>
-      <AdminPages />
-      <StaffPages />
       </>
 
   );
