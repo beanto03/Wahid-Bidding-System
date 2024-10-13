@@ -54,6 +54,7 @@ export default function SignInSide() {
     event.preventDefault();
 
     try {
+      //to tarik email and password and send it to authService.js
       const success = await AuthService.login(email, password);
 
       if (success) {
