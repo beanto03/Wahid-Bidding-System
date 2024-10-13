@@ -11,26 +11,46 @@ const BidHistoryPage = ({ }) => {
   const [buyerId, setBuyerId] = useState(null);
   const [productId, setProductId] = useState(null);
 
+  //use axios
   useEffect(() => {
     const fetchBidHistory = async () => {
       try {
-        const response = await fetch(`${config.backendUrl}/api/bidHistory/getBids`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        setLoading(true); // Start loading
+        const response = await axios.get(`${config.backendUrl}/api/bidHistory/getBids`);
+  
+        // Handle the response
+        if (response.status === 200) {
+          const data = response.data;
+          // Assuming data has buyerId and productId fields
+          setBuyerId(data.buyerId);
+          setProductId(data.productId);
+        } else {
+          throw new Error('Failed to fetch bid history');
         }
-        const data = await response.json();
-        // setBidHistory(data);
-        setBuyerId(data);
-        setProductId(data);
       } catch (error) {
-        setError(error.message);
+        if (error.response) {
+          // Server responded with a status other than 2xx
+          console.error('Error response data:', error.response.data);
+          console.error('Error response status:', error.response.status);
+          console.error('Error response headers:', error.response.headers);
+          setError(`Error: ${error.response.status} ${error.response.statusText}`);
+        } else if (error.request) {
+          // Request was made but no response received
+          console.error('Error request:', error.request);
+          setError('No response received from server.');
+        } else {
+          // Something else happened
+          console.error('Error message:', error.message);
+          setError(error.message);
+        }
       } finally {
-        setLoading(false);
+        setLoading(false); // Stop loading
       }
     };
-
+  
     fetchBidHistory();
-  }, [buyerId, productId]);
+  }, []);
+
 
   if (loading) {
     return <CircularProgress />;

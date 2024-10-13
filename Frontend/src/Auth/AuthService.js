@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:8080/api';
 
-
+  //take login user input in frontend 
 const AuthService = {
   async login(email, password) {
     try {
@@ -29,7 +29,7 @@ const AuthService = {
     }
   },
 
-
+        //take register from user input in frontend 
     async register({ name, email, password, role }) {
       try {
           //console.log('Sending registration request:', { name, email, password, role }); // Debugging output
@@ -59,6 +59,8 @@ const AuthService = {
           return false; // Registration failed
       }
   }
+
+  
 };
 
 export default AuthService;
