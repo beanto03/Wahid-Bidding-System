@@ -4,7 +4,7 @@ const API_BASE_URL = 'http://localhost:8080/api';
 const AuthService = {
   async login(email, password) {
     try {
-      const response = await axios.post('${API_BASE_URL}/login', { // Corrected with backticks
+      const response = await axios.post(`${API_BASE_URL}/login`, { // Corrected with backticks
         email,
         password,
       },
@@ -82,21 +82,6 @@ const AuthService = {
         withCredentials: true
       });
         //take register from user input in frontend 
-    async register({ name, email, password, role }) {
-      try {
-          //console.log('Sending registration request:', { name, email, password, role }); // Debugging output
-          const roleNumber = role === "seller" ? 1 : 0;
-
-           const response = await axios.post('${API_BASE_URL}/register', {
-            name,
-            email,
-            password,
-            role: roleNumber
-          }, {
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-          });
 
       if (response.status === 201 || response.status === 200) {
         console.log('Product added successfully:', response.data);
