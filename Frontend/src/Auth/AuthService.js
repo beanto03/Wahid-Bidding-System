@@ -6,7 +6,7 @@ const API_BASE_URL = 'http://localhost:8080/api';
 const AuthService = {
   async login(email, password) {
     try {
-      const response = await axios.post(`${API_BASE_URL}/login`, { // Corrected with backticks
+      const response = await axios.post('${API_BASE_URL}/login', { // Corrected with backticks
         email,
         password,
       },
@@ -35,7 +35,7 @@ const AuthService = {
           //console.log('Sending registration request:', { name, email, password, role }); // Debugging output
           const roleNumber = role === "seller" ? 1 : 0;
 
-           const response = await axios.post(`${API_BASE_URL}/register`, {
+           const response = await axios.post('${API_BASE_URL}/register', {
             name,
             email,
             password,

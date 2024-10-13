@@ -5,6 +5,7 @@ import SignInSide from "./FrontEnd/login/SignInSide";
 import Home from "./FrontEnd/others/Home";
 import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
+import StaffPages from "./StaffPages";
 
 function App() {
   // const [buyerId, setBuyerId] = useState(null);
@@ -41,8 +42,7 @@ function App() {
       element= {<MyBidding/>}    
     />   
     </Routes>
-      <AdminPages />
-      <StaffPages />
+    <StaffPages/>
       </>
 
   );
