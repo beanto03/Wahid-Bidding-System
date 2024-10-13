@@ -5,7 +5,6 @@ import SignInSide from "./FrontEnd/login/SignInSide";
 import Home from "./FrontEnd/others/Home";
 import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
-import DashboardStaff from "./StaffViews/scense/dashboard";
 import StaffPages from "./StaffPages";
 
 function App() {
@@ -47,6 +46,7 @@ function App() {
     </Routes>
 <StaffPages/>
       </>
+
 
   );
 }
