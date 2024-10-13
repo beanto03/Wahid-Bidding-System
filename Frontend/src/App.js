@@ -8,8 +8,6 @@ import MyBidding from "./FrontEnd/MyBidding";
 import StaffPages from "./StaffPages";
 import DashboardStaff from "./StaffViews/scense/dashboard";
 
-
-
 function App() {
   // const [buyerId, setBuyerId] = useState(null);
   // const [productId, setProductId] = useState(null);
