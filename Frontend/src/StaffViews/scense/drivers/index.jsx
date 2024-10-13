@@ -6,6 +6,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../../Auth/AuthService';
 
+//name 
+//description
+//startingBid
+//imageBase64
+
 // Styled Components
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: '#f5f5f5',
@@ -40,22 +45,8 @@ const DashboardStaff = () => {
 
   const navigate = useNavigate();
 
-  // Fetch products from API on component mount
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        const response = await AuthService.get('/api/products');
-        setProducts(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError('Failed to fetch products. Please try again.');
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  // // Fetch products from API on component mount
+ 
 
   // Handle form submission to add a new product
   const handleAddProduct = async (e) => {
@@ -66,41 +57,31 @@ const DashboardStaff = () => {
       setSubmitError('Please provide product name, price, and image.');
       return;
     }
-
+  
     // Validate that price is a positive number
     const priceValue = parseFloat(newProductPrice);
     if (isNaN(priceValue) || priceValue <= 0) {
       setSubmitError('Please enter a valid positive number for the price.');
       return;
     }
-
+  
     try {
       setSubmitLoading(true);
       setSubmitError(null);
-
-      // Create a form data object to send the image file
-      const formData = new FormData();
-      formData.append('product', JSON.stringify({
+  
+      // Send the product details along with the image file
+      const success = await AuthService.addProduct({
         name: newProductName,
         description: newProductDescription,
         startingBid: priceValue,
-        sellerId: '12345' // Predefined sellerId for testing
-      }));
-      formData.append('images', newProductImage); // Add image file to form data
-
-      // Send POST request to add the new product
-      const response = await axios.post('/api/products/add', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        sellerId: '12345', // Predefined sellerId for testing
+        imageBase64Strings: newProductImage, // Pass the image directly
       });
-
-      if (response.status === 201 || response.status === 200) {
-        // Optionally, you can refresh the product list
-        setProducts([...products, response.data]);
-
-        // Navigate to an empty confirmation page
-        navigate('/product-added'); // Ensure this route exists
+  
+      if (success) {
+        // Optionally, you can refresh the product list or navigate
+        setProducts([...products, success]);
+        navigate('/dashboard-staff'); // Ensure this route exists
       } else {
         setSubmitError('Failed to add product. Please try again.');
       }
@@ -253,7 +234,7 @@ const DashboardStaff = () => {
                 disabled={submitLoading}
               >
                 {submitLoading ? 'Adding...' : 'Add Product'}
-              </Button>
+              </Button>   
             </Grid>
           </Grid>
         </Box>

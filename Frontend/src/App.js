@@ -5,6 +5,8 @@ import SignInSide from "./FrontEnd/login/SignInSide";
 import Home from "./FrontEnd/others/Home";
 import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
+import StaffPages from "./StaffPages";
+import DashboardStaff from "./StaffViews/scense/drivers";
 
 function App() {
   // const [buyerId, setBuyerId] = useState(null);
@@ -40,7 +42,12 @@ function App() {
       path="/biddingHistory"
       element= {<MyBidding/>}    
     />   
+    <Route
+      path="/dashboard-staff"
+      element= {<DashboardStaff/>}    
+    />
     </Routes>
+    <StaffPages/>
       </>
 
   );
