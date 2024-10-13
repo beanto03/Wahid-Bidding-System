@@ -35,14 +35,16 @@ function App() {
       path="/register"
       element= {<RegisterSide/>}    
     />  
-
-
     <Route
       path="/biddingHistory"
       element= {<MyBidding/>}    
     />   
+    <Route
+    path= "dashboard-staff"
+    element= {<DashboardStaff/>}
+    />
     </Routes>
-    <StaffPages/>
+<StaffPages/>
       </>
 
 

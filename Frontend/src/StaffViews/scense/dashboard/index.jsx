@@ -41,12 +41,12 @@ const DashboardStaff = () => {
   const fetchProducts = async () => {
     try {
       // TODO: Replace the URL with your actual API endpoint
-      const response = await axios.get('/api/products'); // Example endpoint
+      const response = await axios.get('/api/bidHistory'); // Example endpoint
       setProducts(response.data);
       setLoading(false);
     } catch (err) {
       console.error("Error fetching products:", err);
-      setError("Failed to load products.");
+      setError("Product failed.");
       setLoading(false);
     }
   };
@@ -56,23 +56,25 @@ const DashboardStaff = () => {
   }, []);
 
   return (
+    
     <Box display="flex">
       {/* Main Content */}
       <Box m="20px" flex="1">
-        {/* Header */}
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb="20px">
-          <Header title="DASHBOARD" subtitle="Welcome to Staff Bidding Website" />
-        </Box>
 
         {/* Products Grid */}
         {loading ? (
           <Box display="flex" justifyContent="center" alignItems="center" height="60vh">
             <CircularProgress />
           </Box>
+          
+          
         ) : error ? (
           <Alert severity="error">{error}</Alert>
         ) : (
           <Grid container spacing={4}>
+                    {/* Header */}
+                    <Header/>
+
             {products.length > 0 ? (
               products.map((product) => (
                 <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
