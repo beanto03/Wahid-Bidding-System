@@ -6,10 +6,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../../Auth/AuthService';
 
-//name 
-//description
-//startingBid
-//imageBase64
 
 // Styled Components
 const StyledCard = styled(Card)(({ theme }) => ({
