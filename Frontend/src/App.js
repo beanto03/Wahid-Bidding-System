@@ -9,7 +9,6 @@ import StaffPages from "./StaffPages";
 import DashboardStaff from "./StaffViews/scense/dashboard";
 import EditProduct from "./StaffViews/scense/drivers/EditProduct";
 
-
 function App() {
   // const [buyerId, setBuyerId] = useState(null);
   // const [productId, setProductId] = useState(null);

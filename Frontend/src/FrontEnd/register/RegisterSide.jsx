@@ -15,7 +15,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AuthService from '../../Auth/AuthService';  // Adjust this according to your service location
+import AuthService from '../../Auth/AuthService';
 import { useNavigate } from 'react-router-dom';
 import { purple, blue, pink } from '@mui/material/colors';
 

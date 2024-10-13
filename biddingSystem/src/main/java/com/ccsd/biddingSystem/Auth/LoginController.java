@@ -15,16 +15,16 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping(produces = "application/json")
-public ResponseEntity<?> login(@RequestBody Login loginRequest) {
-    System.out.println("Login attempt received for email: " + loginRequest.getEmail());
+    public ResponseEntity<?> login(@RequestBody Login loginRequest) {
+        System.out.println("Login attempt received for email: " + loginRequest.getEmail());
     
-    Map<String, Object> response = loginService.login(loginRequest.getEmail(), loginRequest.getPassword());
-    if (response != null) {
-        System.out.println("Login successful for email: " + loginRequest.getEmail());
-        return ResponseEntity.ok(response);
-    }
-    System.out.println("Login failed for email: " + loginRequest.getEmail());
-    return ResponseEntity.status(401).body("Invalid email or password.");
+        Map<String, Object> response = loginService.login(loginRequest.getEmail(), loginRequest.getPassword());
+        if (response != null) {
+            System.out.println("Login successful for email: " + loginRequest.getEmail());
+            return ResponseEntity.ok(response);
+        }
+        System.out.println("Login failed for email: " + loginRequest.getEmail());
+        return ResponseEntity.status(401).body("Invalid email or password.");
 }
 
 }
