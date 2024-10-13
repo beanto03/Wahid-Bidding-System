@@ -99,7 +99,21 @@ const AuthService = {
       }
       return null; // Indicate failure
     }
-  }
+  },
+
+  //to fetch bid history
+
+  async getBidHistory(buyerId, productId) {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/bidHistory/getBids/${buyerId}/${productId}`);
+      return response.data;  // Return the fetched bid history
+    } catch (error) {
+      console.error('Error fetching bid history:', error);
+      throw new Error(error.message);
+    }
+  },
+
+  
 };
 
 export default AuthService;
