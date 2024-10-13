@@ -7,8 +7,6 @@ import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
 import StaffPages from "./StaffPages";
 import DashboardStaff from "./StaffViews/scense/dashboard";
-
-
 import DashboardStaff from "./StaffViews/scense/drivers";
 
 
