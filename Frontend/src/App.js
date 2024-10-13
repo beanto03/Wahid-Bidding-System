@@ -7,6 +7,8 @@ import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
 import StaffPages from "./StaffPages";
 
+import DashboardStaff from "./StaffViews/scense/drivers";
+
 function App() {
   // const [buyerId, setBuyerId] = useState(null);
   // const [productId, setProductId] = useState(null);
@@ -40,12 +42,12 @@ function App() {
       element= {<MyBidding/>}    
     />   
     <Route
-    path= "dashboard-staff"
-    element= {<DashboardStaff/>}
+      path="/dashboard-staff"
+      element= {<DashboardStaff/>}    
     />
     </Routes>
+    <StaffPages/>
 
-<StaffPages/>
       </>
 
 
