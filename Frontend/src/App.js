@@ -5,6 +5,7 @@ import SignInSide from "./FrontEnd/login/SignInSide";
 import Home from "./FrontEnd/others/Home";
 import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
+import StaffPages from "./StaffPages";
 
 function App() {
   // const [buyerId, setBuyerId] = useState(null);
@@ -34,14 +35,19 @@ function App() {
       path="/register"
       element= {<RegisterSide/>}    
     />  
-
-
     <Route
       path="/biddingHistory"
       element= {<MyBidding/>}    
     />   
+    <Route
+    path= "dashboard-staff"
+    element= {<DashboardStaff/>}
+    />
     </Routes>
+
+<StaffPages/>
       </>
+
 
   );
 }
