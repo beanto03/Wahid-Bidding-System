@@ -46,6 +46,8 @@ public class ProductController {
 
         try {
             product = objectMapper.readValue(productString, Product.class);
+            // For testing, using predefined sellerId. Later, replace with session-based sellerId.
+            product.setSellerId("12345"); // TODO: Replace with session-based sellerId after login is implemented.
         } catch (Exception e) {
             logger.error("Error parsing product JSON", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
