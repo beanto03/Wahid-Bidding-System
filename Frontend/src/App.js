@@ -7,7 +7,7 @@ import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
 import StaffPages from "./StaffPages";
 import DashboardStaff from "./StaffViews/scense/dashboard";
-import DashboardStaff from "./StaffViews/scense/drivers";
+import EditProduct from "./StaffViews/scense/drivers/EditProduct";
 
 
 function App() {
@@ -45,6 +45,10 @@ function App() {
     <Route
       path="/dashboard-staff"
       element= {<DashboardStaff/>}    
+    />
+    <Route
+      path="/edit-product/:productId"
+      element={<EditProduct />}    
     />
     </Routes>
     <StaffPages/>
