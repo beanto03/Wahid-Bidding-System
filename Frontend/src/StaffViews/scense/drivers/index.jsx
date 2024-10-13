@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Box, Grid, Card, Typography, Alert, TextField, Button } from '@mui/material';
 import Header from "../../../components/Header";
 import { styled } from '@mui/system';
-import axios from 'axios'; // Ensure axios is installed via npm/yarn
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import AuthService from '../../../Auth/AuthService';
 
 // Styled Components
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -18,7 +19,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const ContentBox = styled(Box)({
+const ContentBox = styled(Box)( {
   marginLeft: 240, // Add margin to the right of the drawer
   padding: '20px',
 });
@@ -32,10 +33,10 @@ const DashboardStaff = () => {
   // States for the new product form
   const [newProductName, setNewProductName] = useState('');
   const [newProductPrice, setNewProductPrice] = useState('');
+
   const [newProductImage, setNewProductImage] = useState(null); // State to store the image
   const [newProductDescription, setNewProductDescription] = useState(''); // New state for description
 
-  
   const [submitError, setSubmitError] = useState(null);
   const [submitLoading, setSubmitLoading] = useState(false);
 
@@ -45,22 +46,22 @@ const DashboardStaff = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true);  // Set loading to true before the request
-        const response = await axios.get('/api/products'); // Replace with your API endpoint
-        setProducts(response.data);  // Assuming response.data contains an array of products
-        setLoading(false);  // Set loading to false once data is fetched
+        setLoading(true);
+        const response = await AuthService.get('/api/products');
+        setProducts(response.data);
+        setLoading(false);
       } catch (err) {
-        setError('Failed to fetch products. Please try again.');  // Set error if request fails
-        setLoading(false);  // Stop loading if there's an error
+        setError('Failed to fetch products. Please try again.');
+        setLoading(false);
       }
     };
 
     fetchProducts();
-  }, []);  // Empty dependency array means this effect runs once after the initial render
+  }, []);
 
   // Handle form submission to add a new product
   const handleAddProduct = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     // Basic validation
     if (!newProductName || !newProductPrice || !newProductImage) {
@@ -81,13 +82,22 @@ const DashboardStaff = () => {
 
       // Create a form data object to send the image file
       const formData = new FormData();
+// Part Amir      
+//       formData.append('product', JSON.stringify({
+//         name: newProductName,
+//         description: newProductDescription,
+//         startingBid: priceValue,
+//         sellerId: '12345' // Predefined sellerId for testing
+//       }));
+//       formData.append('images', newProductImage); // Add image file to form data
+      
       formData.append('productName', newProductName);
       formData.append('productPrice', priceValue);
       formData.append('productImage', newProductImage); // Add image file to form data
       formData.append('productDescription', newProductDescription); // Append description
 
       // Send POST request to add the new product
-      const response = await axios.post('/api/products', formData, {
+      const response = await axios.post('/api/products/add', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -208,12 +218,39 @@ const DashboardStaff = () => {
               />
             </Grid>
             <Grid item xs={12}>
+              <TextField
+                label="Product Description"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                value={newProductDescription}
+                onChange={(e) => setNewProductDescription(e.target.value)}
+                InputLabelProps={{
+                  style: { color: '#fff' },
+                }}
+                sx={{
+                  input: { color: '#fff' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#fff',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#fff',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#fff',
+                    },
+                  },
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
               <input
-                accept="image/*"
                 type="file"
                 onChange={(e) => setNewProductImage(e.target.files[0])}
+                accept="image/*"
                 required
-                style={{ marginBottom: '16px', color: '#fff' }}
               />
             </Grid>
               {/* New Description Field */}
@@ -251,22 +288,10 @@ const DashboardStaff = () => {
               <Button
                 type="submit"
                 variant="contained"
-                sx={{
-                  backgroundColor: '#ff4081',
-                  '&:hover': {
-                    backgroundColor: '#f50057',
-                    transform: 'scale(1.05)',
-                    transition: 'transform 0.2s ease-in-out',
-                  },
-                  padding: '12px',
-                  fontSize: '1.1rem',
-                  fontWeight: 'bold',
-                  width: '100%',
-                  color: '#fff',                     
-                }}
+                color="primary"
                 disabled={submitLoading}
               >
-                {submitLoading ? 'Submitting...' : 'Submit'}
+                {submitLoading ? 'Adding...' : 'Add Product'}
               </Button>
             </Grid>
           </Grid>
