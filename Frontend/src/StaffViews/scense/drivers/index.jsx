@@ -33,6 +33,9 @@ const DashboardStaff = () => {
   const [newProductName, setNewProductName] = useState('');
   const [newProductPrice, setNewProductPrice] = useState('');
   const [newProductImage, setNewProductImage] = useState(null); // State to store the image
+  const [newProductDescription, setNewProductDescription] = useState(''); // New state for description
+
+  
   const [submitError, setSubmitError] = useState(null);
   const [submitLoading, setSubmitLoading] = useState(false);
 
@@ -81,6 +84,7 @@ const DashboardStaff = () => {
       formData.append('productName', newProductName);
       formData.append('productPrice', priceValue);
       formData.append('productImage', newProductImage); // Add image file to form data
+      formData.append('productDescription', newProductDescription); // Append description
 
       // Send POST request to add the new product
       const response = await axios.post('/api/products', formData, {
@@ -176,7 +180,7 @@ const DashboardStaff = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                label="Product Price"
+                label="Bidding Price"
                 variant="outlined"
                 fullWidth
                 type="number"
@@ -210,6 +214,37 @@ const DashboardStaff = () => {
                 onChange={(e) => setNewProductImage(e.target.files[0])}
                 required
                 style={{ marginBottom: '16px', color: '#fff' }}
+              />
+            </Grid>
+              {/* New Description Field */}
+              <Grid item xs={12}>
+              <TextField
+                label="Product Description"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                value={newProductDescription}
+                onChange={(e) => setNewProductDescription(e.target.value)}
+                required
+                InputLabelProps={{
+                  style: { color: '#fff' },
+                }}
+                sx={{
+                  input: { color: '#fff' },
+                  textarea: { color: '#fff' },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#fff',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#fff',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#fff',
+                    },
+                  },
+                }}
               />
             </Grid>
             <Grid item xs={12}>
