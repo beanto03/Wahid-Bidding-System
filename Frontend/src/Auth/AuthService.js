@@ -99,7 +99,53 @@ const AuthService = {
       }
       return null; // Indicate failure
     }
+  },
+
+  
+// Add a request interceptor to include the JWT token in headers
+// axiosInstance.interceptors.request.use(
+//   (config) => {
+//     const token = localStorage.getItem('token'); // Retrieve token from localStorage
+//     if (token) {
+//       config.headers['Authorization'] = `Bearer ${token}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
+// New Method to Fetch Products
+getProducts: async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/products`,{
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    } );
+
+    if (response.status === 200) {
+      console.log('Fetched products successfully:', response.data);
+      return response.data ;
+    } else if (response.status === 204) {
+      // No Content
+      return { success: true, data: [] };
+    } else {
+      console.error('Unexpected response status:', response.status);
+      return { success: false, message: 'Failed to fetch products.' };
+    }
+  } catch (error) {
+    if (error.response) {
+      console.error('Error fetching products:', error.response.data);
+      return { success: false, message: error.response.data.msg || 'Error fetching products.' };
+    } else {
+      console.error('Error fetching products:', error.message);
+      return { success: false, message: 'An error occurred while fetching products.' };
+    }
   }
+},
+ 
 };
 
 export default AuthService;
