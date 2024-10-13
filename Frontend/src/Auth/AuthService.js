@@ -7,10 +7,10 @@ const AuthService = {
   async login(email, password) {
     try {
       const response = await axios.post(`${API_BASE_URL}/login`, { // Corrected with backticks
+
         email,
         password,
-      },
-      {
+      }, {
         headers: {
           'Content-Type': 'application/json',
           "Accept": "application/json"
@@ -41,32 +41,37 @@ const AuthService = {
       }, {
         headers: {
           'Content-Type': 'application/json',
+
         },    
+
       });
 
       if (response.status === 200) {
         console.log('Registration successful:', response.data);
-        return true; // Registration successful
+        return true;
       }
     } catch (error) {
       if (error.response) {
-        console.error('Registration failed:', error.response.data); // Log the server response
+        console.error('Registration failed:', error.response.data);
       } else {
         console.error('Registration error:', error.message);
       }
-      return false; // Registration failed
+      return false;
     }
   },
 
-  async addProduct({ name, description, startingBid, sellerId, images }) {
+  async addProduct({ name, description, startingBid, sellerId, imageBase64Strings }) {
     try {
       const formData = new FormData();
       formData.append('product', JSON.stringify({ name, description, startingBid, sellerId }));
 
-      // Append images to FormData
-      for (let i = 0; i < images.length; i++) {
-        formData.append('images', images[i]);
+      if (imageBase64Strings) {
+        formData.append('images', imageBase64Strings);
       }
+  
+
+      // Log the formData for debugging purposes
+      console.log('FormData being sent:', formData);
 
       const response = await axios.post(`${API_BASE_URL}/products/add`, formData, {
         headers: {
@@ -75,15 +80,23 @@ const AuthService = {
         withCredentials: true
       });
 
-      if (response.status === 201 || response.status === 200) {
+        //take register from user input in frontend 
+
+      // Check for successful response
+      if (response.status === 200 || response.status === 201 ) {
+
         console.log('Product added successfully:', response.data);
         return response.data; // Return the added product
       } else {
-        console.error('Failed to add product:', response.data);
+        console.error('Failed to add product. Response status:', response.status);
         return null; // Indicate failure
       }
     } catch (error) {
-      console.error('Error adding product:', error);
+      if (error.response) {
+        console.error('Error response from server:', error.response.data);
+      } else {
+        console.error('Error adding product:', error.message);
+      }
       return null; // Indicate failure
     }
   }
