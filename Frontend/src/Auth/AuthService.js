@@ -48,6 +48,7 @@ const AuthService = {
       }, {
         headers: {
           'Content-Type': 'application/json',
+  
         },
       });
 
@@ -84,10 +85,12 @@ const AuthService = {
         },
         withCredentials: true
       });
+
         //take register from user input in frontend 
 
       // Check for successful response
       if (response.status === 200 || response.status === 201 ) {
+
         console.log('Product added successfully:', response.data);
         return response.data; // Return the added product
       } else {

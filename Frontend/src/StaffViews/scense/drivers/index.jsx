@@ -193,32 +193,7 @@ const DashboardStaff = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                label="Product Description"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
-                value={newProductDescription}
-                onChange={(e) => setNewProductDescription(e.target.value)}
-                InputLabelProps={{
-                  style: { color: '#fff' },
-                }}
-                sx={{
-                  input: { color: '#fff' },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#fff',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#fff',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#fff',
-                    },
-                  },
-                }}
-              />
+           
             </Grid>
             <Grid item xs={12}>
               <input
