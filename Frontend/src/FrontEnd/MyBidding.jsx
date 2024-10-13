@@ -1,56 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Grid, Button, CircularProgress } from '@mui/material';
-import config from '../config';
 import Sidebar from '../components/Sidebar';
-import axios from 'axios';
+import AuthService from '../Auth/AuthService';
 
-const BidHistoryPage = ({ }) => {
+const BidHistoryPage = () => {
+  const [buyerId, setBuyerId] = useState('someBuyerId');  // Set to the buyer's ID
+  const [productId, setProductId] = useState('someProductId');  // Set to the product's ID
   const [bidHistory, setBidHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [buyerId, setBuyerId] = useState(null);
-  const [productId, setProductId] = useState(null);
 
-  //use axios
   useEffect(() => {
     const fetchBidHistory = async () => {
       try {
-        setLoading(true); // Start loading
-        const response = await axios.get(`${config.backendUrl}/api/bidHistory/getBids`);
-  
-        // Handle the response
-        if (response.status === 200) {
-          const data = response.data;
-          // Assuming data has buyerId and productId fields
-          setBuyerId(data.buyerId);
-          setProductId(data.productId);
-        } else {
-          throw new Error('Failed to fetch bid history');
-        }
+        const data = await AuthService.getBidHistory(buyerId, productId);  // Fetch bid history using AuthService
+        setBidHistory(data);
       } catch (error) {
-        if (error.response) {
-          // Server responded with a status other than 2xx
-          console.error('Error response data:', error.response.data);
-          console.error('Error response status:', error.response.status);
-          console.error('Error response headers:', error.response.headers);
-          setError(`Error: ${error.response.status} ${error.response.statusText}`);
-        } else if (error.request) {
-          // Request was made but no response received
-          console.error('Error request:', error.request);
-          setError('No response received from server.');
-        } else {
-          // Something else happened
-          console.error('Error message:', error.message);
-          setError(error.message);
-        }
+        console.error('Error fetching bid history:', error);
+        setError(error.message);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
-  
-    fetchBidHistory();
-  }, []);
 
+    if (buyerId && productId) {
+      fetchBidHistory();  // Only fetch when both buyerId and productId are available
+    }
+  }, [buyerId, productId]);  // Depend on buyerId and productId changes
 
   if (loading) {
     return <CircularProgress />;
@@ -69,10 +45,10 @@ const BidHistoryPage = ({ }) => {
             <Card>
               <CardContent>
                 <Typography variant="h6" component="div">
-                  Product: {bid.name}
+                  Product: {bid.name}  {/* Replace with your actual field name */}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Current Highest Bid: ${bid.highestAmount}
+                  Current Highest Bid: ${bid.highestAmount}  {/* Replace with your actual field name */}
                 </Typography>
                 <Button variant="contained" color="primary">
                   Contact Seller
