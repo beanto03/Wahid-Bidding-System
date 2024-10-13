@@ -6,6 +6,7 @@ import Home from "./FrontEnd/others/Home";
 import RegisterSide from "./FrontEnd/register/RegisterSide";
 import MyBidding from "./FrontEnd/MyBidding";
 import StaffPages from "./StaffPages";
+import DashboardStaff from "./StaffViews/scense/dashboard";
 
 function App() {
   // const [buyerId, setBuyerId] = useState(null);
