@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,7 +49,7 @@ public class ProductController {
         try {
             product = objectMapper.readValue(productString, Product.class);
             // For testing, using predefined sellerId. Later, replace with session-based sellerId.
-            product.setSellerId("12345"); // TODO: Replace with session-based sellerId after login is implemented.
+            product.setSellerId("12345"); //TODO: Replace with session-based sellerId after login is implemented.
         } catch (Exception e) {
             logger.error("Error parsing product JSON", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -88,25 +89,35 @@ public class ProductController {
                       .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
-    @PutMapping(value = "/update/{productId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update/{productId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Product> updateProduct(
             @PathVariable String productId,
-            @RequestBody Product productDetails) {
-
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("startingBid") double startingBid,
+            @RequestParam("sellerId") String sellerId,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) { // Make imageFile optional
         try {
-            // For testing, using predefined sellerId. Replace with session-based fetching later.
-            productDetails.setSellerId("12345"); // TODO: Replace with session-based sellerId after login is implemented.
-            
-            // Log the received sellerId and other details for debugging
-            logger.info("Updating product with ID: " + productId + ", sellerId: " + productDetails.getSellerId());
+            // Create a new Product object with the updated details
+            Product updatedProduct = new Product();
+            updatedProduct.setProductId(productId); // Assuming you have an ID field in your Product class
+            updatedProduct.setName(name);
+            updatedProduct.setDescription(description);
+            updatedProduct.setStartingBid(startingBid);
+            updatedProduct.setSellerId(sellerId); // Replace with session-based sellerId later
 
-            Product updatedProduct = productService.updateProduct(productId, productDetails);
-            return ResponseEntity.ok(updatedProduct);
+            // Log the received sellerId and other details for debugging
+            logger.info("Updating product with ID: " + productId + ", sellerId: " + updatedProduct.getSellerId());
+
+            // Call your service method to update the product
+            Product savedProduct = productService.updateProduct(productId, updatedProduct, imageFile); // You might need to adjust this method signature
+            return ResponseEntity.ok(savedProduct);
         } catch (Exception e) {
             logger.error("Error updating product", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
 
 
     @DeleteMapping("/delete/{productId}")

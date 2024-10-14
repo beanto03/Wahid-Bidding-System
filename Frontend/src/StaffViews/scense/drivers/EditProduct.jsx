@@ -1,3 +1,5 @@
+//EditProduct.jsx
+//http://localhost:3000/edit-product/{id}}
 import React, { useState, useEffect } from 'react';
 import { Box, Grid, Card, Typography, Alert, TextField, Button } from '@mui/material';
 import Header from "../../../components/Header";
@@ -25,15 +27,14 @@ const ContentBox = styled(Box)({
 });
 
 const EditProduct = () => {
-  const { productId } = "2"; // || useParams(); // Get the productId from the URL
+  const { productId } = useParams();
   const [productDetails, setProductDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // States for the edit product form
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
-  const [productImage, setProductImage] = useState(null); // Base64 string for the image
+  const [productImage, setProductImage] = useState(null);
   const [productDescription, setProductDescription] = useState('');
 
   const [submitError, setSubmitError] = useState(null);
@@ -48,7 +49,7 @@ const EditProduct = () => {
         setProductName(response.data.name);
         setProductPrice(response.data.startingBid);
         setProductDescription(response.data.description);
-        setProductImage(response.data.imageBase64Strings); // Load the existing Base64 string if available
+        setProductImage(response.data.imageBase64Strings);
       } catch (err) {
         console.error('Error fetching product details:', err);
         setError('Failed to fetch product details.');
@@ -58,16 +59,11 @@ const EditProduct = () => {
     };
     fetchProductDetails();
   }, [productId]);
-
-  // Convert image file to Base64 string
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProductImage(reader.result.split(',')[1]); // Extract Base64 part
-      };
-      reader.readAsDataURL(file);
+      setProductImage(file);
     }
   };
 
@@ -85,19 +81,22 @@ const EditProduct = () => {
       return;
     }
 
+    const formData = new FormData();
+    formData.append("name", productName);
+    formData.append("description", productDescription);
+    formData.append("startingBid", priceValue);
+    formData.append("sellerId", '12345'); // Predefined sellerId for testing
+
+    if (productImage) {
+      formData.append("imageFile", productImage);
+    }
+
     try {
       setSubmitLoading(true);
-      setSubmitError(null);
-
-      const success = await AuthService.updateProduct(productId, {
-        name: productName,
-        description: productDescription,
-        startingBid: priceValue,
-        sellerId: '12345', // Predefined sellerId for testing
-        imageBase64Strings: productImage,
-      });
+      const success = await AuthService.updateProduct(productId, formData);
 
       if (success) {
+        console.log('Product updated successfully:', success);
         navigate('/dashboard-staff');
       } else {
         setSubmitError('Failed to update product. Please try again.');
@@ -181,15 +180,26 @@ const EditProduct = () => {
                 rows={4}
                 value={productDescription}
                 onChange={(e) => setProductDescription(e.target.value)}
-                required
               />
             </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" disabled={submitLoading}>
-                {submitLoading ? 'Updating...' : 'Update Product'}
-              </Button>   
-            </Grid>
           </Grid>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              mt: 3,
+              backgroundColor: '#fff',
+              color: '#2193b0',
+              fontWeight: 'bold',
+              ':hover': {
+                backgroundColor: '#6dd5ed',
+                color: '#fff',
+              },
+            }}
+            disabled={submitLoading}
+          >
+            {submitLoading ? 'Updating...' : 'Update Product'}
+          </Button>
         </Box>
       </Box>
     </Box>

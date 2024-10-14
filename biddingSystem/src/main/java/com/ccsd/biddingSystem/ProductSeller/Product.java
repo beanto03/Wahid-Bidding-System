@@ -13,7 +13,7 @@ public class Product {
     private String description;
     private double startingBid;
     private double currentBid;
-    private String sellerId;
+    private String sellerId = "12345";
     private List<String> imageBase64Strings; // Updated to store Base64 strings
 
     // Getters and Setters

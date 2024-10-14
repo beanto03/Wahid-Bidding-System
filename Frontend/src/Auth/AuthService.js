@@ -5,7 +5,7 @@ const API_BASE_URL = 'http://localhost:8080/api';
 
 const AuthService = {
   async login(email, password) {
-    try {
+    // try {
       const response = await axios.post(`${API_BASE_URL}/login`, {
         email,
         password,
@@ -18,15 +18,16 @@ const AuthService = {
       });
 
       if (response.status === 200) {
-        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('email', response.data.email);
         localStorage.setItem('role', response.data.role);
-        localStorage.setItem('token', response.data.token);
+      
+     //   localStorage.setItem('token', response.data.token);
         return true;
       }
-    } catch (error) {
-      console.error('Login failed:', error);
-      return false;
-    }
+    // } catch (error) {
+    //   console.error('Login failed:', error);
+    //   return false;
+    // }
   },
 
   async register({ name, email, password, role }) {
@@ -66,8 +67,8 @@ const AuthService = {
       if (imageBase64Strings) {
         formData.append('images', imageBase64Strings);
       }
-
-      const response = await axios.put(`${API_BASE_URL}/products/add`, formData, {
+        //use POST method not PUT
+      const response = await axios.post(`${API_BASE_URL}/products/add`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -91,55 +92,42 @@ const AuthService = {
     }
   },
 
-  async updateProduct(productId, { name, description, startingBid, sellerId, imageBase64Strings }) {
+  //update product
+
+  async updateProduct(productId, formData) {
     try {
-      const formData = new FormData();
-      formData.append('product', JSON.stringify({ name, description, startingBid, sellerId }));
-
-      if (imageBase64Strings) {
-        formData.append('images', imageBase64Strings);
-      }
-
-      const response = await axios.put(`${API_BASE_URL}/products/update/${productId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials: true
-      });
-
-      if (response.status === 200 || response.status === 204) {
-        console.log('Product updated successfully:', response.data);
-        return response.data; // Return the updated product
-      } else {
-        console.error('Failed to update product. Response status:', response.status);
-        return null; // Indicate failure
-      }
+      const response = await axios.put(
+        `${API_BASE_URL}/products/update/${productId}`,
+        formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      return response.data;
     } catch (error) {
-      if (error.response) {
-        console.error('Error response from server:', error.response.data);
-      } else {
-        console.error('Error updating product:', error.message);
-      }
-      return null; // Indicate failure
-
-  //to fetch bid history
-
-  async getBidHistory(buyerId, productId) {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/bidHistory/getBids/${buyerId}/${productId}`);
-      return response.data;  // Return the fetched bid history
-    } catch (error) {
-      console.error('Error fetching bid history:', error);
-      throw new Error(error.message);
+      console.error('Error updating product:', error);
+      throw error;
     }
   },
+  //to fetch bid history
+
+  // async getBidHistory(buyerId, productId) {
+  //   try {
+  //     const response = await axios.get(${API_BASE_URL}/bidHistory/getBids/${buyerId}/${productId});
+  //     return response.data;  // Return the fetched bid history
+  //   } catch (error) {
+  //     console.error('Error fetching bid history:', error);
+  //     throw new Error(error.message);
+  //   }
+  // },
 
 // Add a request interceptor to include the JWT token in headers
 // axiosInstance.interceptors.request.use(
 //   (config) => {
 //     const token = localStorage.getItem('token'); // Retrieve token from localStorage
 //     if (token) {
-//       config.headers['Authorization'] = `Bearer ${token}`;
+//       config.headers['Authorization'] = Bearer ${token};
 //     }
 //     return config;
 //   },
@@ -149,9 +137,9 @@ const AuthService = {
 // );
 
 // New Method to Fetch Products
-getProducts: async () => {
+async  getProducts() {
   try {
-    const response = await axios.get(`${API_BASE_URL}/products`,{
+    const response = await axios.get(`${API_BASE_URL}/products/all`,{
       headers: {
         'Content-Type': 'application/json',
       },

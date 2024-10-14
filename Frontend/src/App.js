@@ -41,13 +41,11 @@ function App() {
       path="/biddingHistory"
       element= {<MyBidding/>}    
     />   
-    <Route
-      path="/dashboard-staff"
-      element= {<DashboardStaff/>}    
-    />
-    <Route
-      path="/edit-product/:productId"
-      element={<EditProduct />}    
+  
+  
+    <Route //ni jangan buang ye
+      path="/edit-product/:productId" 
+      element={<EditProduct />} 
     />
     </Routes>
     <StaffPages/>
