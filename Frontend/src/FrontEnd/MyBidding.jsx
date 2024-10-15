@@ -31,9 +31,9 @@ const BidHistoryPage = () => {
   return (
     <>
     
-    <Grid container spacing={2} backgroundColor="blue" sx={{ padding: 4 }}>
+    <Grid container spacing={2} sx={{ padding: 4 }}>
     <Sidebar/>
-  {[...Array(3)].map((_, index) => (
+  {[...Array(1)].map((_, index) => (
     <Grid item xs={12} sm={6} md={4} lg={2.4} key={index}>
       <Card sx={{
         backgroundColor: index % 2 === 0 ? '#FFECB3' : '#B3E5FC',
@@ -61,10 +61,10 @@ const BidHistoryPage = () => {
         {/* Product Details */}
         <CardContent>
           <Typography variant="h6" sx={{ color: '#37474F', fontWeight: 'bold' }}>
-            Dummy Product {index + 1} // Product name
+             {index + 1} // Golf Set
           </Typography>
           <Typography variant="body1" sx={{ color: '#1B5E20', marginTop: 1 }}>
-            ${((index + 1) * 10).toFixed(2)} // Product price
+            ${((index + 1) * 10).toFixed(2)} // 300
           </Typography>
         </CardContent>
       </Card>

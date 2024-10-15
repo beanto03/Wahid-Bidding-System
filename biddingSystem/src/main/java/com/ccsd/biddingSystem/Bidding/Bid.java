@@ -10,19 +10,16 @@ public class Bid {
     private String bidId;
     private String buyerId;
     private String productId;
-    private double amount; //current amount of bid
+    private double amount; // Current amount of bid
 
-    //constructor
-    public Bid(){
+    // Constructors, Getters, and Setters
+    public Bid() {}
 
-    }
-    
-    // Getters and Setters
     public String getBidId() {
         return bidId;
     }
 
-    public void setId(String bidId) {
+    public void setBidId(String bidId) {
         this.bidId = bidId;
     }
 

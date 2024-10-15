@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccsd.biddingSystem.BidHistory.BidHistoryService;
-import com.ccsd.biddingSystem.ProductSeller.Product; // For List
-import com.ccsd.biddingSystem.ProductSeller.ProductRepository; // For Comparator
+import com.ccsd.biddingSystem.ProductSeller.Product;
+import com.ccsd.biddingSystem.ProductSeller.ProductRepository;
 
 @Service
 public class BidService {
@@ -33,14 +33,14 @@ public class BidService {
 
         // Check if the bid is higher than the current highest bid
         if (bidAmount <= product.getCurrentBid()) {
-            return "Your bid must be higher than the current bid.";
+            return "Your bid must be higher than the current bid of " + product.getCurrentBid() + ".";
         }
 
         // Update the current bid for the product
         product.setCurrentBid(bidAmount);
         productRepository.save(product);
 
-        // Save the bid details
+        // Save the bid details in the "bids" collection
         Bid bid = new Bid();
         bid.setProductId(productId);
         bid.setBuyerId(buyerId);
@@ -53,8 +53,10 @@ public class BidService {
         return "Bid placed successfully!";
     }
 
+
+
+    // Uncomment this if you want to keep the bidding end logic
     /* 
-    //method to check if the bidding has ended and notify buyers
     public String checkBidEnd(String productId){
         Optional<Product> productOpt = productRepository.findById(productId);
         if (!productOpt.isPresent()){
@@ -82,5 +84,6 @@ public class BidService {
         }
 
         return "Bidding is still ongoing.";
-    }*/
+    }
+    */
 }

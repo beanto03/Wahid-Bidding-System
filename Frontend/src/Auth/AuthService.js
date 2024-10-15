@@ -165,7 +165,54 @@ async  getProducts() {
     }
   }
 },
- 
+
+ /*// Fetch products specifically for bidding
+ async getProductsForBidding() {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/bid/products`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.status === 200) {
+      console.log('Fetched products for bidding successfully:', response.data);
+      return response.data;
+    } else {
+      console.error('Failed to fetch products for bidding. Response status:', response.status);
+      return null;
+    }
+  } catch (error) {
+    if (error.response) {
+      console.error('Error fetching products for bidding:', error.response.data);
+    } else {
+      console.error('Error fetching products for bidding:', error.message);
+    }
+    return null;
+  }
+},*/
+// Add this method to handle product deletion
+async deleteProduct(productId) {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/products/delete/${productId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.status === 200) {
+      console.log('Product deleted successfully:', response.data);
+      return true;
+    } else {
+      console.error('Failed to delete product. Response status:', response.status);
+      return false;
+    }
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    return false;
+  }
+},
+
 };
 
 export default AuthService;

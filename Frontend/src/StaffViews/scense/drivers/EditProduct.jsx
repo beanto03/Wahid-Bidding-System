@@ -6,7 +6,8 @@ import Header from "../../../components/Header";
 import { styled } from '@mui/system';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import AuthService from '../../../Auth/AuthService';
+import AuthService from '../../../Auth/AuthService'
+import SidebarManager from '../global/SidebarManager';
 
 // Styled Components
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -114,6 +115,7 @@ const EditProduct = () => {
 
   return (
     <Box display="flex">
+      <SidebarManager/>
       <Box m="20px" flex="1">
         <Box display="flex" justifyContent="space-between" alignItems="center" mb="20px">
           <Header title="EDIT PRODUCT" subtitle="Please update product details here" />
@@ -200,6 +202,7 @@ const EditProduct = () => {
           >
             {submitLoading ? 'Updating...' : 'Update Product'}
           </Button>
+          
         </Box>
       </Box>
     </Box>

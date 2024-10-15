@@ -141,7 +141,14 @@ const SidebarManager = () => {
               selected={selected}
               setSelected={setSelected}
             />
+ <Item
 
+title="Edit Product"
+to="/edit-product/670dca24d678f436b48c86af"
+icon={<AddBoxIcon />}
+selected={selected}
+              setSelected={setSelected}
+/>
             <Item
               title="Logout"
               to="/login"
