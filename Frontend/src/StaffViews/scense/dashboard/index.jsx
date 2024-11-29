@@ -78,7 +78,7 @@ const DashboardStaff = () => {
             <CardMedia
               component="img"
               height="160"
-              image={'data:image/png;base64,${product.imageBase64Strings}'} // Use the product's image URL
+              image={`data:image/jpeg;base64,${product.imageBase64Strings[0]}`} // Use the product's image URL
               alt={product.name}
               sx={{ borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}
             />

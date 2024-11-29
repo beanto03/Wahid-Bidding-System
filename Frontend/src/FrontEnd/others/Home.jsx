@@ -90,102 +90,112 @@ const Home = () => {
 
   return (
     <>
-      <Sidebar />
       <Box
         sx={{
+          display: 'flex',
           minHeight: '100vh',
           background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: 4,
           boxSizing: 'border-box',
         }}
       >
-        <Typography
-          variant="h2"
+        <Sidebar />
+        <Box
           sx={{
-            fontWeight: 'bold',
-            color: 'purple',
-            textAlign: 'center',
-            fontStyle: 'italic',
-            mb: 4,
-            textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: 4,
           }}
         >
-          Bidding System
-        </Typography>
-
-        <Grid container spacing={4} justifyContent="center" sx={{ width: '100%', maxWidth: '1200px' }}>
-          {/* Dynamic Product Bidding Cards */}
-          {products.map((product, index) => (
-            <Grid item xs={12} md={6} key={product.id || index}> {/* Use product.id or index as fallback */}
-              <Card
-                sx={{
-                  maxWidth: 345,
-                  margin: '0 auto',
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                    boxShadow: 6,
-                  },
-                  background: 'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)',
-                  color: '#fff',
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={`data:image/jpeg;base64,${product.imageBase64Strings[0]}`} // Adjust the format as needed
-                  alt={product.name}
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 'bold',
+              color: 'purple',
+              textAlign: 'center',
+              fontStyle: 'italic',
+              mb: 4,
+              textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
+            }}
+          >
+            Bidding System
+          </Typography>
+  
+          <Grid container spacing={4} justifyContent="left" sx={{ width: '100%', maxWidth: '1200px' }}>
+            {products.map((product, index) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={product.id || index}>
+                <Card
                   sx={{
-                    borderTopLeftRadius: '4px',
-                    borderTopRightRadius: '4px',
-                    cursor: 'pointer',
+                    maxWidth: 345,
+                    margin: '0 auto',
+                    transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                      boxShadow: 6,
+                    },
+                    background: 'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)',
+                    color: '#fff',
+                    display: 'flex',
+                    flexDirection: 'column',
                   }}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {product.name}
-                  </Typography>
-                  <Typography variant="body1">
-                    Current Bid: ${product.currentBid.toLocaleString()}
-                  </Typography>
-                  {/* Placeholder for time left (add timer logic as needed) */}
-                  <Typography variant="body2">Time Left: {/* Implement time left logic here */}</Typography>
-                </CardContent>
-                <CardActions sx={{ justifyContent: 'center', flexDirection: 'column', padding: 2 }}>
-                  <TextField
-                    type="number"
-                    placeholder="Enter your bid"
-                    fullWidth
-                    variant="outlined"
-                    size="small"
-                    onChange={(e) => handleBidChange(product.id, e.target.value)} // Update the bid amount in state
+                >
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={`data:image/jpeg;base64,${product.imageBase64Strings[0]}`}
+                    alt={product.name}
                     sx={{
-                      mb: 2,
-                      '& .MuiOutlinedInput-root': {
-                        '& fieldset': { borderColor: '#fff' },
-                        '&:hover fieldset': { borderColor: '#c2e9fb' },
-                        '&.Mui-focused fieldset': { borderColor: '#a1c4fd' },
-                      },
-                      input: { color: '#fff' },
-                      '& .MuiInputLabel-root': { color: '#fff' },
-                      backgroundColor: 'rgba(255,255,255,0.2)',
-                      borderRadius: '4px',
+                      borderTopLeftRadius: '4px',
+                      borderTopRightRadius: '4px',
+                      cursor: 'pointer',
                     }}
                   />
-                  <GradientButton onClick={() => handleBidSubmit(product)} fullWidth>
-                    Place Bid
-                  </GradientButton>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {product.name}
+                    </Typography>
+                    <Typography variant="body1">
+                      Current Bid: ${product.currentBid.toLocaleString()}
+                    </Typography>
+                    <Typography variant="body2">
+                      Time Left: {/* Implement time left logic here */}
+                    </Typography>
+                  </CardContent>
+                  <CardActions sx={{ justifyContent: 'center', flexDirection: 'column', padding: 2 }}>
+                    <TextField
+                      type="number"
+                      placeholder="Enter your bid"
+                      fullWidth
+                      variant="outlined"
+                      size="small"
+                      onChange={(e) => handleBidChange(product.id, e.target.value)}
+                      sx={{
+                        mb: 2,
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': { borderColor: '#fff' },
+                          '&:hover fieldset': { borderColor: '#c2e9fb' },
+                          '&.Mui-focused fieldset': { borderColor: '#a1c4fd' },
+                        },
+                        input: { color: '#fff' },
+                        '& .MuiInputLabel-root': { color: '#fff' },
+                        backgroundColor: 'rgba(255,255,255,0.2)',
+                        borderRadius: '4px',
+                      }}
+                    />
+                    <GradientButton onClick={() => handleBidSubmit(product)} fullWidth>
+                      Place Bid
+                    </GradientButton>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Box>
     </>
   );
+  
 };
 
 export default Home;
